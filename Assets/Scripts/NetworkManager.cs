@@ -119,10 +119,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         LobbyPanel.SetActive(true);
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "¥‘ »Øøµ«’¥œ¥Ÿ.";
-        if (Max_Player == 2)
-            RemoveParray(2);
-        else if (Max_Player == 3)
-            RemoveParray(3);
+
 
     }
 
@@ -170,7 +167,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void RemoveParray(int num)
     {
-        PV.RPC("RemoveParrayRPC", RpcTarget.All, num);
+        PV.RPC("RemoveParrayRPC", RpcTarget.AllBuffered, num);
     }
 
     [PunRPC]
@@ -185,8 +182,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
         else if(num == 3)
         {
-            
 
+            P[3].SetActive(false);
         }
     }
 
@@ -210,7 +207,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         RoomRenewal();
-        PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + newPlayer.NickName + "¥‘¿Ã ¬¸∞°«œºÃΩ¿¥œ¥Ÿ</color>");
+        PV.RPC("ChatRPC", RpcTarget.AllBuffered, "<color=yellow>" + newPlayer.NickName + "¥‘¿Ã ¬¸∞°«œºÃΩ¿¥œ¥Ÿ</color>");
         Debug.Log("¬¸∞°");
 
 
@@ -219,7 +216,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         RoomRenewal();
-        PV.RPC("ChatRPC", RpcTarget.All, "<color=yellow>" + otherPlayer.NickName + "¥‘¿Ã ≈¿Â«œºÃΩ¿¥œ¥Ÿ</color>");
+        PV.RPC("ChatRPC", RpcTarget.AllBuffered, "<color=yellow>" + otherPlayer.NickName + "¥‘¿Ã ≈¿Â«œºÃΩ¿¥œ¥Ÿ</color>");
     }
 
     public void ImageSelect(int num)
@@ -238,7 +235,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         }
         array[1] = i;
-        PV.RPC("ImageSelectRPC", RpcTarget.All,array);
+        PV.RPC("ImageSelectRPC", RpcTarget.AllBuffered,array);
 
 
     }
@@ -257,13 +254,13 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         }
 
-        PV.RPC("ReadyRPC", RpcTarget.All,i);
+        PV.RPC("ReadyRPC", RpcTarget.AllBuffered,i);
 
 
     }
     public void Gotimer()
     {
-        PV.RPC("GotimerRPC", RpcTarget.All);
+        PV.RPC("GotimerRPC", RpcTarget.AllBuffered);
     }
 
     [PunRPC]
@@ -301,17 +298,22 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+
         RoomPanel.SetActive(true);
         RoomRenewal();
         ChatInput.text = "";
         for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
+        if (Max_Player == 2)
+            RemoveParray(2);
+        else if (Max_Player == 3)
+            RemoveParray(3);
         Debug.Log("πÊ¬¸∞°");
     }
 
     public void Send()
     {
         string msg = PhotonNetwork.NickName + " : " + ChatInput.text;
-        PV.RPC("ChatRPC", RpcTarget.All, PhotonNetwork.NickName + " : " + ChatInput.text);
+        PV.RPC("ChatRPC", RpcTarget.AllBuffered, PhotonNetwork.NickName + " : " + ChatInput.text);
         ChatInput.text = "";
         
     }
