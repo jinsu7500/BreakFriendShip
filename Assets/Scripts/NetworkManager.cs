@@ -29,7 +29,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     [Header("ETC")]
     public Text StatusText;
-    public PhotonView PV ;
+    public PhotonView PV;
     public GameObject[] P;
     public Image[] img;
     public GameObject timer;
@@ -40,7 +40,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
-
+    
     public void MaxPlayer(int num)
     {
         Max_Player = num;
@@ -102,7 +102,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         //로비 접속수 및 총 접속수 표시 변경
         LobbyInfoText.text = (PhotonNetwork.CountOfPlayers - PhotonNetwork.CountOfPlayersInRooms) + "로비 / " + PhotonNetwork.CountOfPlayers + "접속";
-   
+
     }
 
     //서버의 연결 , Master서버에 연결하면 OnConnectedToMaster 콜백
@@ -115,7 +115,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedLobby()
     {
         Debug.Log("로비참가");
-        
+
         LobbyPanel.SetActive(true);
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다.";
@@ -131,7 +131,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         LobbyPanel.SetActive(false);
         RoomPanel.SetActive(false);
         NickNameInput.text = " ";
-        
+
     }
 
     public void CreateRoom()
@@ -147,7 +147,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             // 방이름을 RoomInput.text로 방옵션을 최대인원수 2로 성공적으로 수행되면 OnJoinedRoom 콜백함수실행
             if (Max_Player == 2)
             {
-               
+
                 PhotonNetwork.CreateRoom(RoomInput.text, new RoomOptions { MaxPlayers = 2 });
                 P[2].SetActive(false);
                 P[3].SetActive(false);
@@ -173,14 +173,14 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void RemoveParrayRPC(int num)
     {
-        
-        if(num == 2)
+
+        if (num == 2)
         {
             P[2].SetActive(false);
             P[3].SetActive(false);
-  
+
         }
-        else if(num == 3)
+        else if (num == 3)
         {
 
             P[3].SetActive(false);
@@ -213,15 +213,47 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     }
 
+
+
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        RoomRenewal();
+        Debug.Log("퇴장");
         PV.RPC("ChatRPC", RpcTarget.AllBuffered, "<color=yellow>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
+        PV.RPC("PlayerOut", RpcTarget.AllBuffered, otherPlayer.NickName);
+        RoomRenewal();
+    }
+
+
+    [PunRPC]
+    public void PlayerOut(string o)
+    {
+        for (int i = 0; i < P.Length; i++)
+        {
+
+            if (P[i].transform.GetChild(1).GetComponent<Text>().text == o)
+            {
+
+                for (int j = i; j < Max_Player; j++)
+                {
+
+                    P[i].transform.GetChild(1).GetComponent<Text>().text = P[i + 1].transform.GetChild(1).GetComponent<Text>().text;
+                    P[i].transform.GetChild(2).GetComponent<Text>().text = P[i + 1].transform.GetChild(2).GetComponent<Text>().text;
+                    P[i].transform.GetChild(0).GetComponent<Image>().sprite = P[i + 1].transform.GetChild(0).GetComponent<Image>().sprite;
+
+                }
+                P[PhotonNetwork.CurrentRoom.MaxPlayers - 1].transform.GetChild(1).GetComponent<Text>().text = "";
+                P[PhotonNetwork.CurrentRoom.MaxPlayers - 1].transform.GetChild(2).GetComponent<Text>().text = "<color=#000000>" + "Ready" + "</color>";
+
+                P[PhotonNetwork.CurrentRoom.MaxPlayers - 1].transform.GetChild(0).GetComponent<Image>().sprite = img[4].GetComponent<Image>().sprite;
+            }
+        }
+
+
     }
 
     public void ImageSelect(int num)
     {
-        
+
         int[] array = new int[2];
         array[0] = num;
         int i = 0;
@@ -235,7 +267,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         }
         array[1] = i;
-        PV.RPC("ImageSelectRPC", RpcTarget.AllBuffered,array);
+        PV.RPC("ImageSelectRPC", RpcTarget.AllBuffered, array);
 
 
     }
@@ -254,7 +286,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         }
 
-        PV.RPC("ReadyRPC", RpcTarget.AllBuffered,i);
+        PV.RPC("ReadyRPC", RpcTarget.AllBuffered, i);
 
 
     }
@@ -272,21 +304,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void RoomRenewal()
     {
+
+
         List<string> namelist = new List<string>();
-        
-        
         ListText.text = "";
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
             ListText.text += PhotonNetwork.PlayerList[i].NickName + ((i + 1 == PhotonNetwork.PlayerList.Length) ? "" : ", ");
             namelist.Add(PhotonNetwork.PlayerList[i].NickName);
         }
-        for(int i = PhotonNetwork.PlayerList.Length; i<4;i++)
+        for (int i = PhotonNetwork.PlayerList.Length; i < 4; i++)
         {
             namelist.Add("");
         }
         for (int i = 0; i < P.Length; i++)
-        {     
+        {
             P[i].transform.GetChild(1).GetComponent<Text>().text = namelist[i];
         }
 
@@ -299,7 +331,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
 
-        RoomPanel.SetActive(true);
+
         RoomRenewal();
         ChatInput.text = "";
         for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
@@ -307,6 +339,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             RemoveParray(2);
         else if (Max_Player == 3)
             RemoveParray(3);
+        RoomPanel.SetActive(true);
         Debug.Log("방참가");
     }
 
@@ -315,7 +348,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         string msg = PhotonNetwork.NickName + " : " + ChatInput.text;
         PV.RPC("ChatRPC", RpcTarget.AllBuffered, PhotonNetwork.NickName + " : " + ChatInput.text);
         ChatInput.text = "";
-        
+
     }
 
     [PunRPC] // RPC는 플레이어가 속해있는 방 모든 인원에게 전달한다
@@ -342,7 +375,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("이미지선택");
 
 
-            P[num[1]].transform.GetChild(0).GetComponent<Image>().sprite = img[num[0]].GetComponent<Image>().sprite;
+        P[num[1]].transform.GetChild(0).GetComponent<Image>().sprite = img[num[0]].GetComponent<Image>().sprite;
 
     }
 
@@ -350,7 +383,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public void ReadyRPC(int num)
     {
         int count = 0;
-        
+
         if (P[num].transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
         {
             P[num].transform.GetChild(2).GetComponent<Text>().text = "<color=#000000>" + "Ready" + "</color>";
@@ -360,7 +393,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             P[num].transform.GetChild(2).GetComponent<Text>().text = "<color=#ff0000>" + "Ready" + "</color>";
         }
 
-        for (int i = 0; i< PhotonNetwork.PlayerList.Length; i++)
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
             if (P[i].transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
                 count = count + 1;
@@ -370,6 +403,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             Gotimer();
 
     }
-    
+
 
 }
