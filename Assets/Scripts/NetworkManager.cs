@@ -160,8 +160,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
             else if (Max_Player == 4)
                 PhotonNetwork.CreateRoom(RoomInput.text, new RoomOptions { MaxPlayers = 4 });
-            else
-                PhotonNetwork.CreateRoom(RoomInput.text, new RoomOptions { MaxPlayers = 4 });
+            
         }
     }
 
@@ -220,35 +219,40 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("퇴장");
         PV.RPC("ChatRPC", RpcTarget.AllBuffered, "<color=yellow>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
         PV.RPC("PlayerOut", RpcTarget.AllBuffered, otherPlayer.NickName);
-        RoomRenewal();
+        //RoomRenewal();
     }
 
 
     [PunRPC]
     public void PlayerOut(string o)
     {
-        for (int i = 0; i < P.Length; i++)
-        {
 
-            if (P[i].transform.GetChild(1).GetComponent<Text>().text == o)
+        Debug.Log("PlayerOut실행");
+
+            for (int i = 0; i < PhotonNetwork.CurrentRoom.MaxPlayers; i++)
             {
 
-                for (int j = i; j < Max_Player; j++)
+                if (P[i].transform.GetChild(1).GetComponent<Text>().text == o)
                 {
+                    Debug.Log("if문 실행");
+                    for (int j = i; j < PhotonNetwork.CurrentRoom.MaxPlayers; j++)
+                    {
+                        Debug.Log("if문 내부 포문 실행");
+                        P[j].transform.GetChild(1).GetComponent<Text>().text = P[j + 1].transform.GetChild(1).GetComponent<Text>().text;
+                        P[j].transform.GetChild(2).GetComponent<Text>().text = P[j + 1].transform.GetChild(2).GetComponent<Text>().text;
+                        P[j].transform.GetChild(0).GetComponent<Image>().sprite = P[j + 1].transform.GetChild(0).GetComponent<Image>().sprite;
 
-                    P[i].transform.GetChild(1).GetComponent<Text>().text = P[i + 1].transform.GetChild(1).GetComponent<Text>().text;
-                    P[i].transform.GetChild(2).GetComponent<Text>().text = P[i + 1].transform.GetChild(2).GetComponent<Text>().text;
-                    P[i].transform.GetChild(0).GetComponent<Image>().sprite = P[i + 1].transform.GetChild(0).GetComponent<Image>().sprite;
+                    }
 
                 }
-                P[PhotonNetwork.CurrentRoom.MaxPlayers - 1].transform.GetChild(1).GetComponent<Text>().text = "";
-                P[PhotonNetwork.CurrentRoom.MaxPlayers - 1].transform.GetChild(2).GetComponent<Text>().text = "<color=#000000>" + "Ready" + "</color>";
-
-                P[PhotonNetwork.CurrentRoom.MaxPlayers - 1].transform.GetChild(0).GetComponent<Image>().sprite = img[4].GetComponent<Image>().sprite;
             }
-        }
-
-
+            P[PhotonNetwork.CurrentRoom.PlayerCount].transform.GetChild(1).GetComponent<Text>().text = "";
+            P[PhotonNetwork.CurrentRoom.PlayerCount].transform.GetChild(2).GetComponent<Text>().text = "<color=black>" + "Ready" + "</color>";
+            
+        
+            
+            P[PhotonNetwork.CurrentRoom.PlayerCount].transform.GetChild(0).GetComponent<Image>().sprite = img[4].GetComponent<Image>().sprite;
+        
     }
 
     public void ImageSelect(int num)
@@ -317,7 +321,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             namelist.Add("");
         }
-        for (int i = 0; i < P.Length; i++)
+        for (int i = 0; i < P.Length-1; i++)
         {
             P[i].transform.GetChild(1).GetComponent<Text>().text = namelist[i];
         }
@@ -386,7 +390,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         if (P[num].transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
         {
-            P[num].transform.GetChild(2).GetComponent<Text>().text = "<color=#000000>" + "Ready" + "</color>";
+            P[num].transform.GetChild(2).GetComponent<Text>().text = "<color=black>" + "Ready" + "</color>";
         }
         else
         {
