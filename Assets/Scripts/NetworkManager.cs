@@ -19,6 +19,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Button[] CellBtn;
     public Button PreviousBtn;
     public Button NextBtn;
+    public Image Lobby_Img;
+    public Text NicknameText;
 
     [Header("RoomPanel")]
     public GameObject RoomPanel;
@@ -26,21 +28,26 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Text RoomInfoText;
     public Text[] ChatText;
     public InputField ChatInput;
+    public GameObject Left;
 
     [Header("ETC")]
     public Text StatusText;
     public PhotonView PV;
-    public GameObject[] P;
+    //public GameObject[] P;
     public Image[] img;
     public GameObject timer;
+    public GameObject prefab;
 
 
+    [Header("SelectCharacterImagePanel")]
+    public GameObject SelectCharacterImagePanel;
+    public Image selectImg;
 
     int Max_Player = 0;
 
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
-    
+
     public void MaxPlayer(int num)
     {
         Max_Player = num;
@@ -92,7 +99,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     {
         Screen.SetResolution(960, 540, false);
         PhotonNetwork.SendRate = 60;
-        PhotonNetwork.SerializationRate = 30;
+        PhotonNetwork.SerializationRate = 100;
     }
 
     private void Update()
@@ -114,11 +121,25 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     //JoinLobby() 콜백함수로 실행
     public override void OnJoinedLobby()
     {
-        Debug.Log("로비참가");
+        SelectCharacterImagePanel.SetActive(false);
 
-        LobbyPanel.SetActive(true);
-        PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
-        WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다.";
+        Debug.Log("로비참가");
+        if (NickNameInput.text != "")
+        {
+            LobbyPanel.SetActive(true);
+            PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
+            WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다.";
+            NicknameText.text = PhotonNetwork.LocalPlayer.NickName + " 님";
+
+            Lobby_Img.transform.GetComponent<Image>().sprite = selectImg.GetComponent<Image>().sprite;
+            
+
+        }
+        else
+        {
+            NickNameInput.GetComponent<Animator>().SetTrigger("on");
+            PhotonNetwork.Disconnect();
+        }
 
 
     }
@@ -128,14 +149,21 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public override void OnDisconnected(DisconnectCause cause)
     {
-        LobbyPanel.SetActive(false);
-        RoomPanel.SetActive(false);
-        NickNameInput.text = " ";
+        if (NickNameInput.text != "")
+        {
+            LobbyPanel.SetActive(false);
+            RoomPanel.SetActive(false);
+            NickNameInput.text = "";
+        }
 
     }
 
     public void CreateRoom()
     {
+        for (int i = 0; i < Left.transform.childCount; i++)
+        {
+            Destroy(Left.transform.GetChild(i).gameObject);
+        }
         if (RoomInput.text == "")
         {
 
@@ -149,42 +177,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             {
 
                 PhotonNetwork.CreateRoom(RoomInput.text, new RoomOptions { MaxPlayers = 2 });
-                P[2].SetActive(false);
-                P[3].SetActive(false);
+                //P[2].SetActive(false);
+                //P[3].SetActive(false);
             }
             else if (Max_Player == 3)
             {
                 PhotonNetwork.CreateRoom(RoomInput.text, new RoomOptions { MaxPlayers = 3 });
-                P[3].SetActive(false);
+               // P[3].SetActive(false);
             }
 
             else if (Max_Player == 4)
                 PhotonNetwork.CreateRoom(RoomInput.text, new RoomOptions { MaxPlayers = 4 });
-            
+
         }
     }
 
-    public void RemoveParray(int num)
-    {
-        PV.RPC("RemoveParrayRPC", RpcTarget.AllBuffered, num);
-    }
 
-    [PunRPC]
-    public void RemoveParrayRPC(int num)
-    {
 
-        if (num == 2)
-        {
-            P[2].SetActive(false);
-            P[3].SetActive(false);
-
-        }
-        else if (num == 3)
-        {
-
-            P[3].SetActive(false);
-        }
-    }
 
     // 함수 createRoom이 성공적으로 수행하지 못했을 경우 실행
     public override void OnCreateRoomFailed(short returnCode, string message)
@@ -200,60 +209,83 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void JoinRandomRoom() => PhotonNetwork.JoinRandomRoom();
 
-    public void LeaveRoom() => PhotonNetwork.JoinRandomRoom();
+    public void LeaveRoom() => PhotonNetwork.LeaveRoom();
 
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
+
         RoomRenewal();
-        PV.RPC("ChatRPC", RpcTarget.AllBuffered, "<color=yellow>" + newPlayer.NickName + "님이 참가하셨습니다</color>");
-        Debug.Log("참가");
-
-
+        Debug.Log("OnPlayerEnteredRoom실행");
     }
 
-
+    [PunRPC]
+    public void player_left_room(string o)
+    {
+        for (int i = 0; i < Left.transform.childCount; i++)
+        {
+            if (Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text == o)
+            {
+                Destroy(Left.transform.GetChild(i).gameObject);
+                break;
+            }
+        }
+        for (int i = 0; i < Left.transform.childCount; i++)
+        {
+            Left.transform.GetChild(i).name = "P" + (i + 1);
+        }
+    }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         Debug.Log("퇴장");
-        PV.RPC("ChatRPC", RpcTarget.AllBuffered, "<color=yellow>" + otherPlayer.NickName + "님이 퇴장하셨습니다</color>");
-        PV.RPC("PlayerOut", RpcTarget.AllBuffered, otherPlayer.NickName);
-        //RoomRenewal();
+
+
+        
+        PV.RPC("player_left_room", RpcTarget.AllBuffered, otherPlayer.NickName);
+        RoomRenewal();
     }
 
-
-    [PunRPC]
-    public void PlayerOut(string o)
+    public void btn_roomOut()
     {
-
-        Debug.Log("PlayerOut실행");
-
-            for (int i = 0; i < PhotonNetwork.CurrentRoom.MaxPlayers; i++)
-            {
-
-                if (P[i].transform.GetChild(1).GetComponent<Text>().text == o)
-                {
-                    Debug.Log("if문 실행");
-                    for (int j = i; j < PhotonNetwork.CurrentRoom.MaxPlayers; j++)
-                    {
-                        Debug.Log("if문 내부 포문 실행");
-                        P[j].transform.GetChild(1).GetComponent<Text>().text = P[j + 1].transform.GetChild(1).GetComponent<Text>().text;
-                        P[j].transform.GetChild(2).GetComponent<Text>().text = P[j + 1].transform.GetChild(2).GetComponent<Text>().text;
-                        P[j].transform.GetChild(0).GetComponent<Image>().sprite = P[j + 1].transform.GetChild(0).GetComponent<Image>().sprite;
-
-                    }
-
-                }
-            }
-            P[PhotonNetwork.CurrentRoom.PlayerCount].transform.GetChild(1).GetComponent<Text>().text = "";
-            P[PhotonNetwork.CurrentRoom.PlayerCount].transform.GetChild(2).GetComponent<Text>().text = "<color=black>" + "Ready" + "</color>";
-            
         
-            
-            P[PhotonNetwork.CurrentRoom.PlayerCount].transform.GetChild(0).GetComponent<Image>().sprite = img[4].GetComponent<Image>().sprite;
-        
+        Debug.Log(Left.transform.childCount);
+        for (int i = 0; i < Left.transform.childCount; i++)
+        {         
+                Destroy(Left.transform.GetChild(i).gameObject);     
+        }
+        GameObject a = Instantiate(prefab);
+        a.name = "P" + (transform.childCount + 1);
+        a.transform.GetChild(1).GetComponent<Text>().text = PhotonNetwork.LocalPlayer.NickName;
+        a.transform.parent = Left.transform;
+        a.transform.localScale = new Vector3(1f, 1f, 1f);
+        if (SelectChaPanel.char_num == 1)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[0].GetComponent<Image>().sprite;
+
+        }
+        else if (SelectChaPanel.char_num == 2)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[1].GetComponent<Image>().sprite;
+
+        }
+        else if (SelectChaPanel.char_num == 3)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[2].GetComponent<Image>().sprite;
+
+        }
+        else if (SelectChaPanel.char_num == 4)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[3].GetComponent<Image>().sprite;
+
+        }
+        a.SetActive(false);
+        RoomPanel.SetActive(false);
+        LobbyPanel.SetActive(true);
+        LeaveRoom();
     }
+
+
 
     public void ImageSelect(int num)
     {
@@ -267,36 +299,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             {
                 break;
             }
-
-
         }
         array[1] = i;
-        PV.RPC("ImageSelectRPC", RpcTarget.AllBuffered, array);
-
-
-    }
-
-    public void Ready()
-    {
-        int count = 0;
-        int i = 0;
-        for (i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            if (PhotonNetwork.PlayerList[i].NickName == PhotonNetwork.LocalPlayer.NickName)
-            {
-                break;
-            }
-
-
-        }
-
-        PV.RPC("ReadyRPC", RpcTarget.AllBuffered, i);
-
+       // PV.RPC("ImageSelectRPC", RpcTarget.AllBuffered, array);
 
     }
+
+
     public void Gotimer()
     {
-        PV.RPC("GotimerRPC", RpcTarget.AllBuffered);
+        PV.RPC("GotimerRPC", RpcTarget.All);
     }
 
     [PunRPC]
@@ -308,7 +320,23 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     void RoomRenewal()
     {
+        for (int j = 0; j < Left.transform.childCount; j++)
+        {
+            for (int i = j + 1; i < Left.transform.childCount; i++)
 
+                if (Left.transform.GetChild(j).transform.GetChild(1).GetComponent<Text>().text == Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text)
+                {
+                    Debug.Log("반복문if문실행!!");
+                    Debug.Log(Left.transform.GetChild(j).transform.GetChild(1).GetComponent<Text>().text);
+                    Debug.Log(Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text);
+
+                    Destroy(Left.transform.GetChild(j).gameObject);
+                    Debug.Log("반복문if문끝!!");
+                    break;
+
+                }
+
+        }
 
         List<string> namelist = new List<string>();
         ListText.text = "";
@@ -321,30 +349,79 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         {
             namelist.Add("");
         }
-        for (int i = 0; i < P.Length-1; i++)
+        for (int i = 0; i < Left.transform.childCount; i++)
         {
-            P[i].transform.GetChild(1).GetComponent<Text>().text = namelist[i];
         }
 
         RoomInfoText.text = PhotonNetwork.CurrentRoom.Name + " / " + PhotonNetwork.CurrentRoom.PlayerCount + "명 / " + PhotonNetwork.CurrentRoom.MaxPlayers + "최대";
 
-
     }
 
+    [PunRPC]
+    public void player_join_room(string[] array1)
+    {
+
+        Debug.Log("player_join_room실행");
+        
+        GameObject a = Instantiate(prefab) ;
+        
+        a.name = "P" + (transform.childCount + 1);
+        a.transform.GetChild(1).GetComponent<Text>().text = array1[0];
+        a.transform.parent = Left.transform;
+        a.transform.localScale = new Vector3(1f, 1f, 1f);
+        if (int.Parse(array1[1]) == 1)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[0].GetComponent<Image>().sprite;
+
+        }
+        else if (int.Parse(array1[1]) == 2)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[1].GetComponent<Image>().sprite;
+
+        }
+        else if (int.Parse(array1[1]) == 3)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[2].GetComponent<Image>().sprite;
+
+        }
+        else if (int.Parse(array1[1]) == 4)
+        {
+            a.transform.GetChild(0).GetComponent<Image>().sprite = img[3].GetComponent<Image>().sprite;
+
+        }
+        a.SetActive(true);
+       
+    }
 
     public override void OnJoinedRoom()
     {
 
-
+        Debug.Log("OnJoinedRoom실행");
+        for (int j = 0; j < Left.transform.childCount; j++)
+        {
+            Debug.Log(Left.transform.GetChild(j).transform.GetChild(1).GetComponent<Text>().text);
+        }
+            
+        
+        string[] array1 = new string[2];
+        array1[0] = NickNameInput.text;
+        array1[1] = SelectChaPanel.char_num.ToString();
+        PV.RPC("player_join_room", RpcTarget.AllBuffered, array1);
+        
+        for (int j = 0; j < Left.transform.childCount; j++)
+        {
+            Left.transform.GetChild(j).gameObject.SetActive(true);
+                
+        }
         RoomRenewal();
+
+        
+
         ChatInput.text = "";
         for (int i = 0; i < ChatText.Length; i++) ChatText[i].text = "";
-        if (Max_Player == 2)
-            RemoveParray(2);
-        else if (Max_Player == 3)
-            RemoveParray(3);
+
         RoomPanel.SetActive(true);
-        Debug.Log("방참가");
+        
     }
 
     public void Send()
@@ -359,13 +436,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     void ChatRPC(string msg)
     {
         bool isInput = false;
+
         for (int i = 0; i < ChatText.Length; i++)
+        {
+
             if (ChatText[i].text == "")
             {
+                Debug.Log("chat if문: " + i);
                 isInput = true;
                 ChatText[i].text = msg;
                 break;
             }
+        }
         if (!isInput) // 꽉차면 한칸씩 위로 올림
         {
             for (int i = 1; i < ChatText.Length; i++) ChatText[i - 1].text = ChatText[i].text;
@@ -373,37 +455,53 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-    [PunRPC]
-    public void ImageSelectRPC(int[] num)
+
+    public void Ready()
     {
-        Debug.Log("이미지선택");
 
+        int i = 0;
+        for ( i = 0; i < Left.transform.childCount; i++)
+        {
+            if (Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text == PhotonNetwork.LocalPlayer.NickName)
+            {
+                break;
+            }
+        }
 
-        P[num[1]].transform.GetChild(0).GetComponent<Image>().sprite = img[num[0]].GetComponent<Image>().sprite;
+        PV.RPC("ReadyRPC", RpcTarget.AllBuffered, Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text);
 
     }
 
     [PunRPC]
-    public void ReadyRPC(int num)
+    public void ReadyRPC(string o)
     {
         int count = 0;
-
-        if (P[num].transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
+        for(int i = 0; i < Left.transform.childCount; i++)
         {
-            P[num].transform.GetChild(2).GetComponent<Text>().text = "<color=black>" + "Ready" + "</color>";
+            if(o == Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text)
+            {
+                if (Left.transform.GetChild(i).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
+                {
+                    Left.transform.GetChild(i).transform.GetChild(2).GetComponent<Text>().text = "<color=black>" + "Ready" + "</color>";
+                }
+                else
+                {
+                    Left.transform.GetChild(i).transform.GetChild(2).GetComponent<Text>().text = "<color=#ff0000>" + "Ready" + "</color>";
+                }
+                break;
+            }
         }
-        else
-        {
-            P[num].transform.GetChild(2).GetComponent<Text>().text = "<color=#ff0000>" + "Ready" + "</color>";
-        }
 
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+
+        
+
+        for (int j = 0; j < Left.transform.childCount; j++)
         {
-            if (P[i].transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
+            if (Left.transform.GetChild(j).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
                 count = count + 1;
         }
 
-        if (count == PhotonNetwork.PlayerList.Length && PhotonNetwork.PlayerList.Length == Max_Player)
+        if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
             Gotimer();
 
     }
