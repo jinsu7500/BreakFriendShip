@@ -50,6 +50,8 @@ MonoBehaviour:
   - PlayerOut_ImageChangeRPC
   - PlayerOutImageChangeRPC
   - PlayerOut
+  - player_join_room
+  - player_left_room
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
