@@ -11,6 +11,7 @@ public class timer : MonoBehaviour
     public GameObject RoomPanel;
     public GameObject RobbyPanel;
     public GameObject time;
+    public GameObject Canvas;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +33,7 @@ public class timer : MonoBehaviour
             round1.SetActive(true);
             RoomPanel.SetActive(false);
             RobbyPanel.SetActive(false);
+            Canvas.SetActive(false);
         }
         countdownText.text = (Mathf.Round(setTime)).ToString();
     }

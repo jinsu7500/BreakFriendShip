@@ -52,6 +52,7 @@ MonoBehaviour:
   - PlayerOut
   - player_join_room
   - player_left_room
+  - spawnRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

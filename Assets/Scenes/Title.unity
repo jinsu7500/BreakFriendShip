@@ -664,6 +664,7 @@ MonoBehaviour:
   - {fileID: 1773122691}
   timer: {fileID: 757462645}
   prefab: {fileID: 5251084146012683504, guid: a9ad195201dd466499c13c349dfce967, type: 3}
+  canvas: {fileID: 1502985985}
   SelectCharacterImagePanel: {fileID: 688518976}
   selectImg: {fileID: 981357748}
 --- !u!4 &224294910
@@ -911,7 +912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!156049354 &276784066
 Grid:
   m_ObjectHideFlags: 0
@@ -3720,6 +3721,7 @@ MonoBehaviour:
   RoomPanel: {fileID: 429565639}
   RobbyPanel: {fileID: 324843337}
   time: {fileID: 757462645}
+  Canvas: {fileID: 1502985985}
 --- !u!114 &757462648
 MonoBehaviour:
   m_ObjectHideFlags: 0

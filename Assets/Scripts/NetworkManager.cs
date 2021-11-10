@@ -39,6 +39,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public GameObject prefab;
 
 
+    [Header("Canvas")]
+    public GameObject canvas;
+
     [Header("SelectCharacterImagePanel")]
     public GameObject SelectCharacterImagePanel;
     public Image selectImg;
@@ -327,13 +330,18 @@ public class NetworkManager : MonoBehaviourPunCallbacks
        // PV.RPC("ImageSelectRPC", RpcTarget.AllBuffered, array);
 
     }
-
+    [PunRPC]
+    public void spawnRPC()
+    {
+        Spawn();
+    }
 
     public void Gotimer()
     {
         Debug.Log("Gotimer½ÇÇà");
-        Spawn();
+        
         PV.RPC("GotimerRPC", RpcTarget.All);
+        PV.RPC("spawnRPC", RpcTarget.All);
     }
 
     [PunRPC]
