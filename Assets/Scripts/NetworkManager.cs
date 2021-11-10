@@ -192,7 +192,30 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    public void Spawn()
+    {
+        Debug.Log("Spawn함수");
+        if (SelectChaPanel.char_num == 1)
+        {
+            PhotonNetwork.Instantiate("MaskDude",Vector3.zero, Quaternion.identity);
 
+        }
+        else if (SelectChaPanel.char_num == 2)
+        {
+            PhotonNetwork.Instantiate("NinjaFrog", Vector3.zero, Quaternion.identity);
+
+        }
+        else if (SelectChaPanel.char_num == 3)
+        {
+            PhotonNetwork.Instantiate("PinkMan", Vector3.zero, Quaternion.identity);
+
+        }
+        else if (SelectChaPanel.char_num == 4)
+        {
+            PhotonNetwork.Instantiate("VitualGuy", Vector3.zero, Quaternion.identity);
+
+        }
+    }
 
 
     // 함수 createRoom이 성공적으로 수행하지 못했을 경우 실행
@@ -308,12 +331,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public void Gotimer()
     {
+        Debug.Log("Gotimer실행");
+        Spawn();
         PV.RPC("GotimerRPC", RpcTarget.All);
     }
 
     [PunRPC]
     public void GotimerRPC()
     {
+        Debug.Log("GotimerRPC실행");
+        
         timer.SetActive(true);
     }
 
@@ -455,10 +482,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
-
+    //버튼
     public void Ready()
     {
-
+        Debug.Log("Ready실행");
         int i = 0;
         for ( i = 0; i < Left.transform.childCount; i++)
         {
@@ -468,14 +495,32 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             }
         }
 
+
         PV.RPC("ReadyRPC", RpcTarget.AllBuffered, Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text);
+        ready_check();
 
     }
+    public void ready_check()
+    {
+        int count = 0;
+        for (int j = 0; j < Left.transform.childCount; j++)
+        {
+            if (Left.transform.GetChild(j).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
+                count = count + 1;
+        }
+
+        if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+        {
+            Gotimer();
+        }
+    }
+
 
     [PunRPC]
     public void ReadyRPC(string o)
     {
-        int count = 0;
+        Debug.Log("ReadyRPC실행");
+        //int count = 0;
         for(int i = 0; i < Left.transform.childCount; i++)
         {
             if(o == Left.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text)
@@ -495,14 +540,16 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
         
 
-        for (int j = 0; j < Left.transform.childCount; j++)
-        {
-            if (Left.transform.GetChild(j).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
-                count = count + 1;
-        }
+        //for (int j = 0; j < Left.transform.childCount; j++)
+        //{
+        //    if (Left.transform.GetChild(j).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
+        //        count = count + 1;
+        //}
 
-        if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
-            Gotimer();
+        //if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
+        //{
+        //    Gotimer();
+        //}
 
     }
 

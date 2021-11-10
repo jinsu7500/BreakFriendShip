@@ -8,6 +8,8 @@ public class timer : MonoBehaviour
     [SerializeField] float setTime = 4.0f;
     [SerializeField] Text countdownText;
     public GameObject round1;
+    public GameObject RoomPanel;
+    public GameObject RobbyPanel;
     public GameObject time;
     // Start is called before the first frame update
     void Start()
@@ -28,6 +30,8 @@ public class timer : MonoBehaviour
         {
             time.SetActive(false);
             round1.SetActive(true);
+            RoomPanel.SetActive(false);
+            RobbyPanel.SetActive(false);
         }
         countdownText.text = (Mathf.Round(setTime)).ToString();
     }
