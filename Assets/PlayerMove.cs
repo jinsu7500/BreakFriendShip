@@ -26,8 +26,8 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckGround();
-        if (Input.GetButtonDown("Jump")/* && !animator.GetBool("isJump")*/)
+      //  CheckGround();
+        if (Input.GetButtonDown("Jump"))
         {
             isJumping = true;
         }
@@ -77,23 +77,23 @@ public class PlayerMove : MonoBehaviour
         //isJumping = false;
 
     }
-    void CheckGround() {      
-        RaycastHit2D raycastHit = Physics2D.BoxCast(col2D.bounds.center, col2D.bounds.size, 0f, Vector2.down, 0.02f, LayerMask.GetMask("Ground"));
-        if (raycastHit.collider != null)
-            animator.SetBool("isJump", false);
-        else animator.SetBool("isJump", true);
+    //void CheckGround() {      
+    //    RaycastHit2D raycastHit = Physics2D.BoxCast(col2D.bounds.center, col2D.bounds.size, 0f, Vector2.down, 0.02f, LayerMask.GetMask("Ground"));
+    //    if (raycastHit.collider != null)
+    //        animator.SetBool("isJump", false);
+    //    else animator.SetBool("isJump", true);
 
-        ////Å×½ºÆ®¿ë
-        Debug.DrawRay(transform.position, Vector3.down * 1.2f, Color.red);
-        //RaycastHit hit;
-        //if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.2f)) {
-        //    if (hit.transform.tag == "Ground") {
-        //        isGround = true;
-        //        Debug.Log("¶¥¹ÙÅ¹È÷Æ®");
-        //        return;
-        //    }
-        //}
-        //isGround = false;
+    //    ////Å×½ºÆ®¿ë
+    //    Debug.DrawRay(transform.position, Vector3.down * 1.2f, Color.red);
+    //    //RaycastHit hit;
+    //    //if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.2f)) {
+    //    //    if (hit.transform.tag == "Ground") {
+    //    //        isGround = true;
+    //    //        Debug.Log("¶¥¹ÙÅ¹È÷Æ®");
+    //    //        return;
+    //    //    }
+    //    //}
+    //    //isGround = false;
 
-    }
+    //}
 }
