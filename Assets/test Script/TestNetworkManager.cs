@@ -20,7 +20,7 @@ public class TestNetworkManager : MonoBehaviourPunCallbacks
 
     public void Connect() => PhotonNetwork.ConnectUsingSettings();
 
-    public void OnConnectedToMaster()
+    public override void OnConnectedToMaster()
     {
         PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
         PhotonNetwork.JoinOrCreateRoom("Room", new RoomOptions { MaxPlayers = 6 }, null);
@@ -29,5 +29,21 @@ public class TestNetworkManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         DisconnectPanel.SetActive(false);
+        Spawn();
+    }
+
+    void Update() { if (Input.GetKeyDown(KeyCode.Escape) && PhotonNetwork.IsConnected) PhotonNetwork.Disconnect(); }
+
+    public void Spawn()
+    {
+        Debug.Log("Spawn");
+        PhotonNetwork.Instantiate("Player", Vector3.zero, Quaternion.identity);
+        RespawnPanel.SetActive(false);
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        DisconnectPanel.SetActive(true);
+        RespawnPanel.SetActive(false);
     }
 }

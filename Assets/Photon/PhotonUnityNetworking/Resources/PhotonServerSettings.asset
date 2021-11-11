@@ -53,6 +53,9 @@ MonoBehaviour:
   - player_join_room
   - player_left_room
   - spawnRPC
+  - FilpXRPC
+  - JumpRPC
+  - DoubleJumpRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
