@@ -51,6 +51,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
 
+
+    public GameObject Camera;
+    
     public Transform SpawnPosition;
 
     public void MaxPlayer(int num)
@@ -202,22 +205,36 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("SpawnÇÔ¼ö");
         if (SelectChaPanel.char_num == 1)
         {
-            PhotonNetwork.Instantiate("MaskDude", SpawnPosition.position, SpawnPosition.rotation);
+            GameObject Player = PhotonNetwork.Instantiate("MaskDude", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
+            Camera.transform.parent = Player.transform;
+            Camera.transform.position = new Vector3(-58,-13,-10);
+            
 
         }
         else if (SelectChaPanel.char_num == 2)
         {
-            PhotonNetwork.Instantiate("NinjaFrog", SpawnPosition.position, SpawnPosition.rotation);
+            
+
+            GameObject Player = PhotonNetwork.Instantiate("NinjaFrog", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
+            Camera.transform.parent = Player.transform;
+            Camera.transform.position = new Vector3(-58, -13, -10);
+
 
         }
         else if (SelectChaPanel.char_num == 3)
         {
-            PhotonNetwork.Instantiate("PinkMan", Vector3.zero, Quaternion.identity);
+
+            GameObject Player = PhotonNetwork.Instantiate("PinkMan", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
+            Camera.transform.parent = Player.transform;
+            Camera.transform.position = new Vector3(-58, -13, -10);
 
         }
         else if (SelectChaPanel.char_num == 4)
         {
-            PhotonNetwork.Instantiate("VitualGuy", Vector3.zero, Quaternion.identity);
+
+            GameObject Player = PhotonNetwork.Instantiate("VitualGuy", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
+            Camera.transform.parent = Player.transform;
+            Camera.transform.position = new Vector3(-58, -13, -10);
 
         }
     }

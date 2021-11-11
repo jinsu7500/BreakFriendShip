@@ -667,6 +667,7 @@ MonoBehaviour:
   canvas: {fileID: 1502985985}
   SelectCharacterImagePanel: {fileID: 688518976}
   selectImg: {fileID: 981357748}
+  Camera: {fileID: 519420028}
   SpawnPosition: {fileID: 557110121}
 --- !u!4 &224294910
 Transform:
@@ -934,7 +935,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 276784065}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.29, y: -13, z: 0}
+  m_LocalPosition: {x: -58, y: -13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 557110121}
@@ -2318,7 +2319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0.1, y: 0.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

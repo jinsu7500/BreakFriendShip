@@ -30,7 +30,7 @@ public class timer : MonoBehaviour
         if (Mathf.Round(setTime).ToString() == "0")
         {
             time.SetActive(false);
-            round1.SetActive(true);
+            
             RoomPanel.SetActive(false);
             RobbyPanel.SetActive(false);
             Canvas.SetActive(false);
