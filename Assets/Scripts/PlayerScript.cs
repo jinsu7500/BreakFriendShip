@@ -51,9 +51,12 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 1)
             {
                 Debug.Log(jumpCount);
-                PV.RPC("JumpRPC", RpcTarget.All);
+                PV.RPC("JumpRPC", RpcTarget.All, isGround);
+                
                 jumpCount++;
+
                 AN.SetBool("isDoubleJump", !isGround);
+                PV.RPC("DoubleJumpRPC", RpcTarget.All, isGround);
                 Debug.Log(jumpCount);
             }
             if (isGround)
@@ -75,17 +78,19 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     void FilpXRPC(float axis) => SR.flipX = axis == -1;// 왼쪽 키를 누를 경우 True 반환 오른쪽 키를 누르는 경우 False 반환
 
     [PunRPC]
-    void JumpRPC()
+    void JumpRPC(bool isGround)
     {
+        AN.SetBool("isJump", !isGround);
         RB.velocity = Vector2.zero;
-        RB.AddForce(Vector2.up * 500);
+        RB.AddForce(Vector2.up * 300);
     }
 
     [PunRPC]
-    void DoubleJumpRPC()
+    void DoubleJumpRPC(bool isGround)
     {
+        AN.SetBool("isDoubleJump", !isGround);
         RB.velocity = Vector2.zero;
-        RB.AddForce(Vector2.up * 500);
+        RB.AddForce(Vector2.up * 300);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
