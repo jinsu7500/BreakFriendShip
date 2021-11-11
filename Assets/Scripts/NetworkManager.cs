@@ -51,6 +51,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     List<RoomInfo> myList = new List<RoomInfo>();
     int currentPage = 1, maxPage, multiple;
 
+    public Transform SpawnPosition;
+
     public void MaxPlayer(int num)
     {
         Max_Player = num;
@@ -200,12 +202,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         Debug.Log("SpawnÇÔ¼ö");
         if (SelectChaPanel.char_num == 1)
         {
-            PhotonNetwork.Instantiate("MaskDude",Vector3.zero, Quaternion.identity);
+            PhotonNetwork.Instantiate("MaskDude", SpawnPosition.position, SpawnPosition.rotation);
 
         }
         else if (SelectChaPanel.char_num == 2)
         {
-            PhotonNetwork.Instantiate("NinjaFrog", Vector3.zero, Quaternion.identity);
+            PhotonNetwork.Instantiate("NinjaFrog", SpawnPosition.position, SpawnPosition.rotation);
 
         }
         else if (SelectChaPanel.char_num == 3)

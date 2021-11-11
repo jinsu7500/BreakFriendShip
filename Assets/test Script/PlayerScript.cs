@@ -35,30 +35,31 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
             if (axis != 0)
             {
-                AN.SetBool("run", true);
+                AN.SetBool("isRun", true);
                 PV.RPC("FilpXRPC", RpcTarget.AllBuffered, axis);// 재접속시 FilpX를 동기화해주기 위해서 AllBuffered
             }
             else
             {
-                AN.SetBool("run", false);
+                AN.SetBool("isRun", false);
             }
 
             // 점프, 바닥체크
             isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(0, -0.5f), 0.07f, 1 << LayerMask.NameToLayer("Ground"));
             
           
-            AN.SetBool("jump", !isGround);
+            AN.SetBool("isJump", !isGround);
             if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 1)
             {
                 Debug.Log(jumpCount);
                 PV.RPC("JumpRPC", RpcTarget.All);
                 jumpCount++;
-                AN.SetBool("doublejump", !isGround);
+                AN.SetBool("isDoubleJump", !isGround);
                 Debug.Log(jumpCount);
             }
             if (isGround)
             {
                 jumpCount = 0;
+                AN.SetBool("isDoubleJump", false);
             }
             
             
