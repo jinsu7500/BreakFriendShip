@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -625180541
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7166236263522030466, guid: 97d5ce53f3ac76e4888319c6a53c7ff3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -124,8 +124,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.41, y: 0.7}
+  m_Offset: {x: -0.062161416, y: -0.05036995}
+  m_Size: {x: 0.5343228, y: 0.8007398}
   m_Direction: 0
 --- !u!95 &3069144752583930985
 Animator:
@@ -187,14 +187,14 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 4
-    SynchronizeType: 1
-    Name: run
+    SynchronizeType: 0
+    Name: isRun
   - Type: 4
-    SynchronizeType: 1
-    Name: jump
+    SynchronizeType: 0
+    Name: isJump
   - Type: 4
-    SynchronizeType: 1
-    Name: doublejump
+    SynchronizeType: 0
+    Name: isDoubleJump
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0

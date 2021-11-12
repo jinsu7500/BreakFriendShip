@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -21,6 +22,16 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         // 닉네임 표시
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
+
+        //자기 플레이어를 따라다니는 카메라 설정
+        //CM은 시네머신 카메라 변수
+        //에러남 보류
+        if (PV.IsMine)
+        {
+            var CM = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+            CM.Follow = transform;
+            CM.LookAt = transform;
+        }
     }
 
     void Update()

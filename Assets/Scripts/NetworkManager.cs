@@ -54,7 +54,10 @@ public class NetworkManager : MonoBehaviourPunCallbacks
 
     public GameObject Camera;
     
-    public Transform SpawnPosition;
+    public Transform SpawnPosition_P1;
+    public Transform SpawnPosition_P2;
+    public Transform SpawnPosition_P3;
+    public Transform SpawnPosition_P4;
 
     public void MaxPlayer(int num)
     {
@@ -200,41 +203,39 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         }
     }
 
+    //캐릭터 스폰 함수
     public void Spawn()
     {
         Debug.Log("Spawn함수");
         if (SelectChaPanel.char_num == 1)
         {
-            GameObject Player = PhotonNetwork.Instantiate("MaskDude", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
-            Camera.transform.parent = Player.transform;
-            Camera.transform.position = new Vector3(-58,-13,-10);
-            
+            GameObject Player = PhotonNetwork.Instantiate("MaskDude", SpawnPosition_P1.position, SpawnPosition_P1.rotation) as GameObject;            
+            //Camera.transform.parent = Player.transform;
+            //Camera.transform.position = new Vector3(-110, -14, -10);
+
 
         }
         else if (SelectChaPanel.char_num == 2)
-        {
-            
-
-            GameObject Player = PhotonNetwork.Instantiate("NinjaFrog", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
-            Camera.transform.parent = Player.transform;
-            Camera.transform.position = new Vector3(-58, -13, -10);
+        {           
+            GameObject Player = PhotonNetwork.Instantiate("NinjaFrog", SpawnPosition_P2.position, SpawnPosition_P2.rotation) as GameObject;            
+            //Camera.transform.parent = Player.transform;
+            //Camera.transform.position = new Vector3(-108, -14, -10);
 
 
         }
         else if (SelectChaPanel.char_num == 3)
         {
-
-            GameObject Player = PhotonNetwork.Instantiate("PinkMan", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
-            Camera.transform.parent = Player.transform;
-            Camera.transform.position = new Vector3(-58, -13, -10);
+            GameObject Player = PhotonNetwork.Instantiate("PinkMan", SpawnPosition_P3.position, SpawnPosition_P3.rotation) as GameObject;
+            //Camera.transform.parent = Player.transform;
+            //Camera.transform.position = new Vector3(-106, -14, -10);
 
         }
         else if (SelectChaPanel.char_num == 4)
         {
 
-            GameObject Player = PhotonNetwork.Instantiate("VitualGuy", SpawnPosition.position, SpawnPosition.rotation) as GameObject;
-            Camera.transform.parent = Player.transform;
-            Camera.transform.position = new Vector3(-58, -13, -10);
+            GameObject Player = PhotonNetwork.Instantiate("VitualGuy", SpawnPosition_P4.position, SpawnPosition_P4.rotation) as GameObject;
+            //Camera.transform.parent = Player.transform;
+            //Camera.transform.position = new Vector3(-104, -14, -10);
 
         }
     }
