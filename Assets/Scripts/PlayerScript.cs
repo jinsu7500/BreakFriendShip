@@ -48,10 +48,13 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             {
                 AN.SetBool("isRun", true);
                 PV.RPC("FilpXRPC", RpcTarget.AllBuffered, axis);// 재접속시 FilpX를 동기화해주기 위해서 AllBuffered
+                PV.RPC("RunOn", RpcTarget.All);
             }
             else
             {
+
                 AN.SetBool("isRun", false);
+                PV.RPC("RunOFF", RpcTarget.All);
             }
 
             // 점프, 바닥체크
@@ -73,7 +76,13 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             if (isGround)
             {
                 jumpCount = 0;
+
                 AN.SetBool("isDoubleJump", false);
+
+
+                PV.RPC("JumpRpcOff", RpcTarget.All);
+                PV.RPC("DoubleJumpOffRPC", RpcTarget.All);
+              //  PV.RPC("RunOFF", RpcTarget.All);
             }
             
             
@@ -85,8 +94,37 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
     }
 
+
+
     [PunRPC]
-    void FilpXRPC(float axis) => SR.flipX = axis == -1;// 왼쪽 키를 누를 경우 True 반환 오른쪽 키를 누르는 경우 False 반환
+    void JumpRpcOff()
+    {
+        AN.SetBool("isJump", false);
+    }
+
+    [PunRPC]
+    void RunOFF()
+    {
+        AN.SetBool("isRun", false);
+    }
+
+    [PunRPC]
+    void RunOn()
+    {
+        AN.SetBool("isRun", true);
+    }
+    [PunRPC]
+    void DoubleJumpOffRPC()
+    {
+        AN.SetBool("isDoubleJump", false);
+    }
+
+    [PunRPC]
+    void FilpXRPC(float axis)
+    {
+        SR.flipX = axis == -1;
+        
+    }// 왼쪽 키를 누를 경우 True 반환 오른쪽 키를 누르는 경우 False 반환
 
     [PunRPC]
     void JumpRPC(bool isGround)
