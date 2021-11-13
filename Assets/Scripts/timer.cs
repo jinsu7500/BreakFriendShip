@@ -43,9 +43,9 @@ public class timer : MonoBehaviour
             Title_Name.gameObject.SetActive(false);
             UI_Btn_Start.gameObject.SetActive(false);
             UI_Btn_End.gameObject.SetActive(false);
-            TypingText.gameObject.SetActive(true);
+            //TypingText.gameObject.SetActive(true);
 
-            GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start();
+            //GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start();
         }
         countdownText.text = (Mathf.Round(setTime)).ToString();
     }
