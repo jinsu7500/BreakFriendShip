@@ -58,6 +58,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Transform SpawnPosition_P2;
     public Transform SpawnPosition_P3;
     public Transform SpawnPosition_P4;
+    public GameObject PlayerObj;
+    public Image deathImg;
+    public static string RoomMaster = "";
 
     public void MaxPlayer(int num)
     {
@@ -201,6 +204,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
                 PhotonNetwork.CreateRoom(RoomInput.text, new RoomOptions { MaxPlayers = 4 });
 
         }
+        RoomMaster = PhotonNetwork.LocalPlayer.NickName;
     }
 
     //캐릭터 스폰 함수
@@ -210,32 +214,29 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (SelectChaPanel.char_num == 1)
         {
             GameObject Player = PhotonNetwork.Instantiate("MaskDude", SpawnPosition_P1.position, SpawnPosition_P1.rotation) as GameObject;            
-            //Camera.transform.parent = Player.transform;
-            //Camera.transform.position = new Vector3(-110, -14, -10);
+            Player.transform.parent = PlayerObj.transform;
+            
 
 
         }
         else if (SelectChaPanel.char_num == 2)
         {           
-            GameObject Player = PhotonNetwork.Instantiate("NinjaFrog", SpawnPosition_P2.position, SpawnPosition_P2.rotation) as GameObject;            
-            //Camera.transform.parent = Player.transform;
-            //Camera.transform.position = new Vector3(-108, -14, -10);
+            GameObject Player = PhotonNetwork.Instantiate("NinjaFrog", SpawnPosition_P2.position, SpawnPosition_P2.rotation) as GameObject;
+            Player.transform.parent = PlayerObj.transform;
 
 
         }
         else if (SelectChaPanel.char_num == 3)
         {
             GameObject Player = PhotonNetwork.Instantiate("PinkMan", SpawnPosition_P3.position, SpawnPosition_P3.rotation) as GameObject;
-            //Camera.transform.parent = Player.transform;
-            //Camera.transform.position = new Vector3(-106, -14, -10);
+            Player.transform.parent = PlayerObj.transform;
 
         }
         else if (SelectChaPanel.char_num == 4)
         {
 
             GameObject Player = PhotonNetwork.Instantiate("VitualGuy", SpawnPosition_P4.position, SpawnPosition_P4.rotation) as GameObject;
-            //Camera.transform.parent = Player.transform;
-            //Camera.transform.position = new Vector3(-104, -14, -10);
+            Player.transform.parent = PlayerObj.transform;
 
         }
     }
@@ -536,7 +537,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             if (Left.transform.GetChild(j).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
                 count = count + 1;
         }
-
+        Gotimer();
         if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             Gotimer();

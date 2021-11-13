@@ -14,7 +14,8 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public PhotonView PV;
     public Text NickNameText;
 
-    bool isGround;
+    public bool isGround;
+    public bool isRun;
     Vector3 curPos;
     int jumpCount = 0;
 
@@ -46,13 +47,14 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
             if (axis != 0)
             {
+                isRun = true;
                 AN.SetBool("isRun", true);
                 PV.RPC("FilpXRPC", RpcTarget.AllBuffered, axis);// 재접속시 FilpX를 동기화해주기 위해서 AllBuffered
                 PV.RPC("RunOn", RpcTarget.All);
             }
             else
             {
-
+                isRun = false;
                 AN.SetBool("isRun", false);
                 PV.RPC("RunOFF", RpcTarget.All);
             }

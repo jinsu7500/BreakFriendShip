@@ -12,6 +12,12 @@ public class timer : MonoBehaviour
     public GameObject RobbyPanel;
     public GameObject time;
     public GameObject Canvas;
+
+    public Image Title_BG;
+    public Image Title_Name;
+    public Button UI_Btn_Start;
+    public Button UI_Btn_End;
+    public Text TypingText;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,7 +39,13 @@ public class timer : MonoBehaviour
             
             RoomPanel.SetActive(false);
             RobbyPanel.SetActive(false);
-            Canvas.SetActive(false);
+            Title_BG.gameObject.SetActive(false);
+            Title_Name.gameObject.SetActive(false);
+            UI_Btn_Start.gameObject.SetActive(false);
+            UI_Btn_End.gameObject.SetActive(false);
+            TypingText.gameObject.SetActive(true);
+
+            GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start();
         }
         countdownText.text = (Mathf.Round(setTime)).ToString();
     }

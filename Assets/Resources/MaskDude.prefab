@@ -231,6 +231,8 @@ MonoBehaviour:
   SR: {fileID: 3069144752583930988}
   PV: {fileID: 7236655729076847564}
   NickNameText: {fileID: 3146589449852468667}
+  isGround: 0
+  isRun: 0
 --- !u!1 &3447284900834561637
 GameObject:
   m_ObjectHideFlags: 0
