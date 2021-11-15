@@ -119,7 +119,7 @@ GameObject:
   - component: {fileID: 2831783254679344782}
   m_Layer: 0
   m_Name: NinjaFrog
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,6 +337,8 @@ MonoBehaviour:
   SR: {fileID: 4001065300227087163}
   PV: {fileID: 5783099410902430084}
   NickNameText: {fileID: 6045255635017775265}
+  isGround: 0
+  isRun: 0
 --- !u!1 &7470080020950030495
 GameObject:
   m_ObjectHideFlags: 0

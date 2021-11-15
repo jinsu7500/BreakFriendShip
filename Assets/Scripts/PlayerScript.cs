@@ -125,7 +125,6 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     void FilpXRPC(float axis)
     {
         SR.flipX = axis == -1;
-        
     }// 왼쪽 키를 누를 경우 True 반환 오른쪽 키를 누르는 경우 False 반환
 
     [PunRPC]

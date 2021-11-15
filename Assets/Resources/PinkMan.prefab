@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 5055639314086122699}
   m_Layer: 0
   m_Name: PinkMan
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,3 +416,5 @@ MonoBehaviour:
   SR: {fileID: 5825251836617200840}
   PV: {fileID: 4984441609720369867}
   NickNameText: {fileID: 2837894532361038148}
+  isGround: 0
+  isRun: 0

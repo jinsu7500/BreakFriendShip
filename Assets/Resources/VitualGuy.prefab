@@ -198,7 +198,7 @@ GameObject:
   - component: {fileID: 8522792993748014029}
   m_Layer: 0
   m_Name: VitualGuy
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -416,3 +416,5 @@ MonoBehaviour:
   SR: {fileID: 7320669584503334063}
   PV: {fileID: 8396153069318601996}
   NickNameText: {fileID: 8345131215352521955}
+  isGround: 0
+  isRun: 0

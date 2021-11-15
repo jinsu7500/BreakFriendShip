@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 public class BulletScript : MonoBehaviourPunCallbacks
 {
@@ -14,7 +15,7 @@ public class BulletScript : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-
+       
     }
 
     // Update is called once per frame
@@ -31,10 +32,27 @@ public class BulletScript : MonoBehaviourPunCallbacks
     {
         if (bullet.transform.position.x > -85.544 )
         {
-            bullet.transform.Translate(new Vector3(-24.66317f, 0, 0));
+            PV.RPC("moveBulletRPC", RpcTarget.AllBuffered);
         }
-        bullet.transform.Translate(Vector3.right * 7 * Time.deltaTime);
+        bullet.transform.Translate(Vector3.right * 5 * Time.deltaTime);
 
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Ground" || collision.tag == "Player" || collision.tag == "Box")
+        {
+            PV.RPC("moveBulletRPC", RpcTarget.AllBuffered);
+        }
+        
+    }
+
+    [PunRPC]
+    void moveBulletRPC()
+    {
+        bullet.transform.position = new Vector3(-110.207f, -18.395f, 0);
+    }
+
 }
+
+
