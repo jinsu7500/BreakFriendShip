@@ -14,12 +14,14 @@ public class R2_Trigger1_Enter : MonoBehaviour
 
     //}
 
-    private void OnTriggerEnter2D(Collision other)
-    {    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         Debug.Log("트리거엔터");
-        bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
+        if (collision.tag == "Player")
+        {
+            bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
 
-        bullet.BulletScriptTriiger = true;
-        
+            bullet.BulletScriptTriiger = true;
+        }
     }
 }
