@@ -64,6 +64,7 @@ MonoBehaviour:
   - Text_Syn_RPC
   - moveBulletRPC
   - OnTriggerEnter2D
+  - Syn_update
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

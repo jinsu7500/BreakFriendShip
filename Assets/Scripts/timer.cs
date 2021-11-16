@@ -43,9 +43,12 @@ public class timer : MonoBehaviour
             Title_Name.gameObject.SetActive(false);
             UI_Btn_Start.gameObject.SetActive(false);
             UI_Btn_End.gameObject.SetActive(false);
-            TypingText.gameObject.SetActive(true);
 
-            GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start();
+            // 무궁화꽃이 피었습니다에서 사용
+            //TypingText.gameObject.SetActive(true);
+            //GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start();
+
+            GameObject.Find("NetworkManager").GetComponent<NetworkManager>().Collect_player();
         }
         countdownText.text = (Mathf.Round(setTime)).ToString();
     }

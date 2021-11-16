@@ -37,7 +37,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Image[] img;
     public GameObject timer;
     public GameObject prefab;
-
+    
 
     [Header("Canvas")]
     public GameObject canvas;
@@ -59,7 +59,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Transform SpawnPosition_P3;
     public Transform SpawnPosition_P4;
     public GameObject PlayerObj;
-    public Image deathImg;
+    //public Image deathImg;
     public static string RoomMaster = "";
 
     public void MaxPlayer(int num)
@@ -138,23 +138,39 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         SelectCharacterImagePanel.SetActive(false);
 
         Debug.Log("로비참가");
-        if (NickNameInput.text != "")
-        {
+
             LobbyPanel.SetActive(true);
-            PhotonNetwork.LocalPlayer.NickName = NickNameInput.text;
+            DisconnectPanel.SetActive(false);
+            PhotonNetwork.LocalPlayer.NickName = PlayFabManager.Nickname;
             WelcomeText.text = PhotonNetwork.LocalPlayer.NickName + "님 환영합니다.";
             NicknameText.text = PhotonNetwork.LocalPlayer.NickName + " 님";
 
             Lobby_Img.transform.GetComponent<Image>().sprite = selectImg.GetComponent<Image>().sprite;
             
 
-        }
-        else
-        {
-            NickNameInput.GetComponent<Animator>().SetTrigger("on");
-            PhotonNetwork.Disconnect();
-        }
+  
 
+
+
+    }
+
+    public void Collect_player()
+    {
+        Debug.Log("Collect실행");
+        GameObject[] Players;
+        // Start is called before the first frame update
+
+        Players = GameObject.FindGameObjectsWithTag("Player");
+
+
+
+        // Update is called once per frame
+
+        for (int i = 0; i < Players.Length; i++)
+        {
+            Debug.Log(Players[i].name);
+            Players[i].transform.parent = PlayerObj.transform;
+        }
 
     }
 
@@ -460,7 +476,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             
         
         string[] array1 = new string[2];
-        array1[0] = NickNameInput.text;
+        array1[0] = PhotonNetwork.LocalPlayer.NickName;
         array1[1] = SelectChaPanel.char_num.ToString();
         PV.RPC("player_join_room", RpcTarget.AllBuffered, array1);
         
