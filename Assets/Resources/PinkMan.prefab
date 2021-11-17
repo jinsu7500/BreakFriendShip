@@ -339,6 +339,7 @@ MonoBehaviour:
   NickNameText: {fileID: 4271783326597287995}
   isGround: 0
   isRun: 0
+  isPlayerDie: 0
 --- !u!1 &7773077967524456332
 GameObject:
   m_ObjectHideFlags: 0

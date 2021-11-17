@@ -19,6 +19,8 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     Vector3 curPos;
     int jumpCount = 0;
 
+    public bool isPlayerDie = false;
+
     void Awake()
     {
         // 닉네임 표시
@@ -77,7 +79,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             }
             if (isGround)
             {
-                jumpCount = 0;
+                jumpCount = 0;               
 
                 AN.SetBool("isDoubleJump", false);
 
@@ -94,6 +96,18 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         //IsMine이 아닌 것들은 부드럽게 위치 동기화
         else if ((transform.position - curPos).sqrMagnitude >= 100) transform.position = curPos;
         else transform.position = Vector3.Lerp(transform.position, curPos, Time.deltaTime * 10);
+
+
+        //플레이어가 살아있는지 체크,(리스폰 애니메이션 보류)
+        if (isPlayerDie)
+        {
+            PV.RPC("PlayerDieRPC", RpcTarget.All);
+            isPlayerDie = !isPlayerDie;
+        }
+        //else
+        //{
+        //    PV.RPC("PlayerRespawnRPC", RpcTarget.All);            
+        //}
     }
 
 
@@ -153,5 +167,17 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         {
             curPos = (Vector3)stream.ReceiveNext();
         }
+    }
+
+    //플레이어 사망시
+    [PunRPC]
+    void PlayerDieRPC() {
+        AN.SetBool("Appearing", true);        
+    }
+
+    //플레이어 부활시
+    [PunRPC]
+    void PlayerRespawnRPC() {
+        AN.SetBool("Appearing", false);
     }
 }

@@ -14,7 +14,7 @@ public class FruitScript : MonoBehaviourPunCallbacks
     public PhotonView PV;
 
     bool isTrigger = false;
-    string name = "";
+    private string name = "";
     void Start()
     {
         
@@ -81,7 +81,7 @@ public class FruitScript : MonoBehaviourPunCallbacks
         {
             Debug.Log(collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text);
             isTrigger = true;
-            name = collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
+            name =  collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
             //PlayerPosition = collision.transform.position;
             //FruitCount++;
         }

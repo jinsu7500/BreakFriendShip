@@ -65,6 +65,10 @@ MonoBehaviour:
   - moveBulletRPC
   - OnTriggerEnter2D
   - Syn_update
+  - playerDieRPC
+  - PlayerDieRPC
+  - PlayerRespawn
+  - PlayerRespawnRPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
