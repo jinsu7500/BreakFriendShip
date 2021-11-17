@@ -42,7 +42,7 @@ public class FruitScript : MonoBehaviourPunCallbacks
             transform.position = Vector2.MoveTowards(transform.position, vec, 0.5f);
 
         }
-        Debug.Log(name);
+        //Debug.Log(name);
     }
     
     void Update()

@@ -10,7 +10,8 @@ public class BoxScript : MonoBehaviourPunCallbacks
 {
     public Animator AN;
     public PhotonView PV;
-    public Tilemap DisappearTile;
+    public GameObject DisappearTile;
+    public GameObject BreakBox1;
     int HitCount = 0;
 
     // Start is called before the first frame update
@@ -26,6 +27,7 @@ public class BoxScript : MonoBehaviourPunCallbacks
         {
             gameObject.SetActive(false);
             DisappearTile.gameObject.SetActive(false);
+            BreakBox1.SetActive(true);
 
         }
     }
