@@ -12,7 +12,12 @@ public class BoxScript : MonoBehaviourPunCallbacks
     public PhotonView PV;
     public GameObject DisappearTile;
     public GameObject BreakBox1;
+    public GameObject AppleKey;
+    public Tilemap BreakTile;
+
+    
     int HitCount = 0;
+    private int MaxHitCount = 4;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +33,8 @@ public class BoxScript : MonoBehaviourPunCallbacks
             gameObject.SetActive(false);
             DisappearTile.gameObject.SetActive(false);
             BreakBox1.SetActive(true);
+            AppleKey.SetActive(true);
+            BreakTile.gameObject.SetActive(false);
 
         }
     }
