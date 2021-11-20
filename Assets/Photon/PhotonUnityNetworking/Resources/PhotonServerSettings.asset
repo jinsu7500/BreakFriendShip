@@ -69,6 +69,12 @@ MonoBehaviour:
   - PlayerDieRPC
   - PlayerRespawn
   - PlayerRespawnRPC
+  - test
+  - RoomMaster_Jump
+  - RoomMaster_Axis
+  - Left_Update
+  - Right_Update
+  - UP_Update
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

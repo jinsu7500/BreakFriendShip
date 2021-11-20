@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
+using Photon.Realtime;
 public class timer : MonoBehaviour
 {
 
@@ -13,11 +15,14 @@ public class timer : MonoBehaviour
     public GameObject time;
     public GameObject Canvas;
 
+
     public Image Title_BG;
     public Image Title_Name;
     public Button UI_Btn_Start;
     public Button UI_Btn_End;
     public Text TypingText;
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -49,6 +54,8 @@ public class timer : MonoBehaviour
             //GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start();
 
             GameObject.Find("NetworkManager").GetComponent<NetworkManager>().Collect_player();
+
+
         }
         countdownText.text = (Mathf.Round(setTime)).ToString();
     }
