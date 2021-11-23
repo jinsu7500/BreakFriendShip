@@ -13,7 +13,7 @@ public class FruitScript : MonoBehaviourPunCallbacks
     public GameObject player;
     public PhotonView PV;
 
-    bool isTrigger = false;
+    public bool isTrigger = false;
     private string name = "";
     void Start()
     {

@@ -14,8 +14,9 @@ public class BoxScript : MonoBehaviourPunCallbacks
     public GameObject BreakBox1;
     public GameObject AppleKey;
     public Tilemap BreakTile;
+    public BulletScript bullet;
 
-    
+
     int HitCount = 0;
     private int MaxHitCount = 4;
 
@@ -35,6 +36,10 @@ public class BoxScript : MonoBehaviourPunCallbacks
             BreakBox1.SetActive(true);
             AppleKey.SetActive(true);
             BreakTile.gameObject.SetActive(false);
+
+            //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
+
+            bullet.BulletScriptTriiger = false;
 
         }
     }

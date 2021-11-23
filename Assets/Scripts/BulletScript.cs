@@ -13,6 +13,9 @@ public class BulletScript : MonoBehaviourPunCallbacks
     public GameObject BulletFire;
     public bool BulletScriptTriiger = false;
     //-85.54383
+
+    [SerializeField]
+    private bool isRight = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +39,10 @@ public class BulletScript : MonoBehaviourPunCallbacks
         //{
         //    PV.RPC("moveBulletRPC", RpcTarget.AllBuffered);
         //}
-        bullet.transform.Translate(Vector3.right * 5 * Time.deltaTime);
+        if(isRight)
+            bullet.transform.Translate(Vector3.right * 5 * Time.deltaTime);
+        else
+            bullet.transform.Translate(Vector3.left * 5 * Time.deltaTime);
 
     }
 

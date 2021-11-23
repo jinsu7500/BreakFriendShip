@@ -316,7 +316,6 @@ MonoBehaviour:
   SR: {fileID: 9148521051268859035}
   PV: {fileID: 3765287836345876348}
   NickNameText: {fileID: 3698580823593656806}
-  player: {fileID: 0}
   isGround: 0
   isRun: 0
   isPlayerDie: 0

@@ -19,7 +19,8 @@ public class R2_Trigger1_Enter : MonoBehaviour
         Debug.Log("트리거엔터");
         if (collision.tag == "Player")
         {
-            bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
+            //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
+            //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
 
             bullet.BulletScriptTriiger = true;
         }
