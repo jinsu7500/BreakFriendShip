@@ -75,6 +75,10 @@ MonoBehaviour:
   - Left_Update
   - Right_Update
   - UP_Update
+  - ElevatorRPC
+  - ElevatorInRPC
+  - ElevatorOutRPC
+  - RB_RPC
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
