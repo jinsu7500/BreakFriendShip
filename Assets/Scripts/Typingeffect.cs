@@ -35,7 +35,7 @@ public class Typingeffect : MonoBehaviour
     public void text_start1()
     {
         
-        InvokeRepeating("text_start", 0.5f,9.6f);
+        InvokeRepeating("text_start", 1.5f,9.6f);
     }
     public void text_start()
     {

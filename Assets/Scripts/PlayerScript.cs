@@ -48,78 +48,78 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     {
         //Debug.Log(GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text);
         #region 1. 캐릭터 동시에 움직이면 사과 움직이기 (위 양 옆)
-        //GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-        // for (int i = 0; i < player.Length; i++)
-        //{
-        //    player_name[i] = player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
-        // }
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < player.Length; i++)
+        {
+            player_name[i] = player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
+        }
 
-        ///*캐릭터 동시에 점프되었을 때*/
-        //    int k = 0;
-        //    for (k = 0; k < player.Length; k++)
-        //    {
-        //        if (player_jump[k] == "0")
-        //        {         
-        //            break;
-        //        }
-        //    }
-        //    if(k == player.Length)
-        //    {
-        //    GameObject.Find("test").transform.GetChild(0).GetComponent<Together_Move>().Move_to_Up();
-        //    //동시점프되었을때 실행함수
-        //}
+        /*캐릭터 동시에 점프되었을 때*/
+        int k = 0;
+        for (k = 0; k < player.Length; k++)
+        {
+            if (player_jump[k] == "0")
+            {
+                break;
+            }
+        }
+        if (k == player.Length)
+        {
+            GameObject.Find("R4_Clear").transform.GetChild(0).GetComponent<Together_Move>().Move_to_Up();
+            //동시점프되었을때 실행함수
+        }
 
-        ///*캐릭터 동시에 정지되었을 때*/
-        //int k1 = 0;
-        //for (k1 = 0; k1 < player.Length; k1++)
-        //{
-        //    if (player_axis[k1] != "0")
-        //    {
-        //        break;
-        //    }
-        //}
-        //if (k1 == player.Length)
-        //{
-        //    Debug.Log(player_axis[0]);
-        //    //캐릭터가 정지되었을떄 실행
-        //}
+        /*캐릭터 동시에 정지되었을 때*/
+        int k1 = 0;
+        for (k1 = 0; k1 < player.Length; k1++)
+        {
+            if (player_axis[k1] != "0")
+            {
+                break;
+            }
+        }
+        if (k1 == player.Length)
+        {
+            Debug.Log(player_axis[0]);
+            //캐릭터가 정지되었을떄 실행
+        }
 
-        ///*캐릭터 동시 오른쪽으로 움직일 때*/
-        //int k2 = 0;
-        //for (k2 = 0; k2 < player.Length; k2++)
-        //{
-        //    if (player_axis[k2] != "1")
-        //    {
-        //        break;
-        //    }
-        //}
-        //if (k2 == player.Length)
-        //{
+        /*캐릭터 동시 오른쪽으로 움직일 때*/
+        int k2 = 0;
+        for (k2 = 0; k2 < player.Length; k2++)
+        {
+            if (player_axis[k2] != "1")
+            {
+                break;
+            }
+        }
+        if (k2 == player.Length)
+        {
 
-        //    GameObject.Find("test").transform.GetChild(0).GetComponent<Together_Move>().Move_to_Right();
-        //    //캐릭터가 오른쪽으로 움직였을떄 실행
-        //}
+            GameObject.Find("R4_Clear").transform.GetChild(0).GetComponent<Together_Move>().Move_to_Right();
+            //캐릭터가 오른쪽으로 움직였을떄 실행
+        }
 
 
-        ///*캐릭터 동시에 왼쪽으로 움직였을 때*/
-        //int k3 = 0;
-        //for (k3 = 0; k3 < player.Length; k3++)
-        //{
-        //    if (player_axis[k3] != "-1")
-        //    {
-        //        break;
-        //    }
-        //}
-        //if (k3 == player.Length)
-        //{
-        //    GameObject.Find("test").transform.GetChild(0).GetComponent<Together_Move>().Move_to_Left();
-        //}
+        /*캐릭터 동시에 왼쪽으로 움직였을 때*/
+        int k3 = 0;
+        for (k3 = 0; k3 < player.Length; k3++)
+        {
+            if (player_axis[k3] != "-1")
+            {
+                break;
+            }
+        }
+        if (k3 == player.Length)
+        {
+            GameObject.Find("R4_Clear").transform.GetChild(0).GetComponent<Together_Move>().Move_to_Left();
+        }
 
-        ///*캐릭터들이 각자 다르게 움직였을 때*/
-        //if(k != player.Length && k1 != player.Length && k2 != player.Length && k3 != player.Length)
-        //{
-        //    //물체 정지함수 실행
-        //}
+        /*캐릭터들이 각자 다르게 움직였을 때*/
+        if (k != player.Length && k1 != player.Length && k2 != player.Length && k3 != player.Length)
+        {
+            //물체 정지함수 실행
+        }
         #endregion
 
         if (PV.IsMine)

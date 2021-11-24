@@ -34,8 +34,10 @@ public class ElevatorScript : MonoBehaviour
     {
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
         string[] name_and_elevator = new string[2];
-        if (other.gameObject.name != "Tilemap")
+        
+        if (other.gameObject.name != "Tilemap" && other.gameObject.name != "Square")
         {
+            Debug.Log(other.gameObject.name);
             string LocalPlayer = other.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
             if (LocalPlayer == PhotonNetwork.LocalPlayer.NickName)
             {               
@@ -61,7 +63,7 @@ public class ElevatorScript : MonoBehaviour
         
         string[] name_and_elevator = new string[2];
         
-        if (other.gameObject.name != "Tilemap")
+        if (other.gameObject.name != "Tilemap" && other.gameObject.name != "Square")
         {
             Debug.Log(other.gameObject.name);
             
