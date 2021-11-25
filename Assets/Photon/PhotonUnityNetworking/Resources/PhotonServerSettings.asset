@@ -79,6 +79,8 @@ MonoBehaviour:
   - ElevatorInRPC
   - ElevatorOutRPC
   - RB_RPC
+  - Syn_update_move
+  - Syn_update_stop
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

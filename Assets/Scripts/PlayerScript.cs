@@ -122,6 +122,27 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         }
         #endregion
 
+
+        int m = 0;
+        for (m = 0; m < player.Length; m++)
+        {
+            if (player_axis[m] != "-1")
+            {
+                break;
+            }
+        }
+        if (m == player.Length)
+        {
+            Debug.Log("고스트 무브");
+            GameObject.Find("Ghost").GetComponent<GhostScript>().GhostMove();
+        }
+
+        if (m != player.Length)
+        {
+            Debug.Log("고스트 스탑");
+            GameObject.Find("Ghost").GetComponent<GhostScript>().GhostStop();
+        }
+
         if (PV.IsMine)
         {
             string[] name_jump_list = new string[2];
