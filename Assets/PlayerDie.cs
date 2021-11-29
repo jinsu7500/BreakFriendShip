@@ -10,8 +10,8 @@ public class PlayerDie : MonoBehaviour
     //public PhotonView PV;    
     public GameObject Player;
     public GameObject PlayerSpawn;
-    public Rigidbody2D PlayerPosition;
-    public PlayerScript playerscript;
+    //public Rigidbody2D PlayerPosition;
+    //public PlayerScript playerscript;
     //public Animator AN;
 
     //[SerializeField]

@@ -16,29 +16,18 @@ public class GhostScript : MonoBehaviourPunCallbacks
 
     public bool isTrigger = false;
 
-    static string[] playerdistance = new string[4];
     private string name = "";
     void Start()
     {
 
     }
-
-    // Update is called once per frame
-
-    //Vector3.Distance(player.transform.GetChild(i).transform.position, transform.position)
-
-
     void Update()
     {
-
-
-        //transform.position = Vector2.MoveTowards(gameObject.transform.position, PlayerPosition, 0.01f);
 
     }
 
     public void GhostMove()
     {
-        RB.constraints = RigidbodyConstraints2D.None;
         int i = 0;
         if (isTrigger)
         {
@@ -55,20 +44,11 @@ public class GhostScript : MonoBehaviourPunCallbacks
         PV.RPC("Syn_update_move", RpcTarget.All);
     }
 
-    public void GhostStop()
-    {
-        RB.constraints = RigidbodyConstraints2D.FreezePositionY;
-        RB.constraints = RigidbodyConstraints2D.FreezeRotation;
-        PV.RPC("Syn_update_stop", RpcTarget.All);
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Ãæµ¹");
-        //for (int i = 0; i < player.transform.childCount; i++) 
-        //{
-        //    if (player.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text == PhotonNetwork.LocalPlayer.NickName) break;
-        //}
+
         if (collision.tag == "Player")
         {
             Debug.Log(collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text);
@@ -83,7 +63,6 @@ public class GhostScript : MonoBehaviourPunCallbacks
     [PunRPC]
     public void Syn_update_move()
     {
-        RB.constraints = RigidbodyConstraints2D.None;
         int i = 0;
         if (isTrigger)
         {
@@ -100,11 +79,5 @@ public class GhostScript : MonoBehaviourPunCallbacks
         //Debug.Log(name);
     }
 
-    [PunRPC]
-    public void Syn_update_stop()
-    {
-        RB.constraints = RigidbodyConstraints2D.FreezePositionX;
-        RB.constraints = RigidbodyConstraints2D.FreezePositionY;
-        RB.constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
+
 }
