@@ -81,6 +81,7 @@ MonoBehaviour:
   - RB_RPC
   - Syn_update_move
   - Syn_update_stop
+  - RoomMaster_isLeft
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

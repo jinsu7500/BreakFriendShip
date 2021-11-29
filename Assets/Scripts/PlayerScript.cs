@@ -18,10 +18,11 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     string[] player_name = new string[4];
     static string[] player_jump = { "0","0","0","0"};
     static string[] player_axis = { "0", "0", "0", "0" };
+    static bool[] player_isLeft = { false,false,false,false };
 
     public bool isGround;
     public bool isRun;
-    
+    public bool isLeft;
     Vector3 curPos;
     int jumpCount = 0;
 
@@ -128,7 +129,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         int m = 0;
         for (m = 0; m < player.Length; m++)
         {
-            if (player_axis[m] != "-1")
+            if (player_isLeft[m] != true)
             {
                 break;
             }
@@ -147,18 +148,32 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         {
             string[] name_jump_list = new string[2];
             string[] name_axis_list = new string[2];
+            string[] name_isLeft_list = new string[2];
+
             name_jump_list[0] = PhotonNetwork.LocalPlayer.NickName;
             name_axis_list[0] = PhotonNetwork.LocalPlayer.NickName;
-         
-            
-           
+            name_isLeft_list[0] = PhotonNetwork.LocalPlayer.NickName;
+
+
+
             // <-(-1 반환), ->(1 반환) 이동, 안누르면 0 반환
             float axis = Input.GetAxisRaw("Horizontal");
             name_axis_list[1] = axis.ToString();
 
             PV.RPC("RoomMaster_Axis", RpcTarget.All, name_axis_list);
 
-
+            if (axis == -1)
+            {
+                name_isLeft_list[1] = "true";
+                isLeft = true;
+                PV.RPC("RoomMaster_isLeft", RpcTarget.All, name_isLeft_list);
+            }
+            if(axis == 1)
+            {
+                name_isLeft_list[1] = "false";
+                isLeft = false;
+                PV.RPC("RoomMaster_isLeft", RpcTarget.All, name_isLeft_list);
+            }
 
             // transform으로 하게되면 벽에 부딪칠 경우 벽을 뚫고 갈려고 함
             RB.velocity = new Vector2(4 * axis, RB.velocity.y);
@@ -232,6 +247,26 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         //    PV.RPC("PlayerRespawnRPC", RpcTarget.All);            
         //}
     }
+    [PunRPC]
+    void RoomMaster_isLeft(string[] name_isLeft_list)
+    {
+
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+
+
+        for (int i = 0; i < player.Length; i++)
+        {
+            if (player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == name_isLeft_list[0])
+            {
+                if(name_isLeft_list[1] == "true")
+                    player_isLeft[i] = true;
+                else if(name_isLeft_list[1] == "false")
+                    player_isLeft[i] = false;
+            }
+        }
+    }
+
+
     [PunRPC]
     void RoomMaster_Axis(string[] name_axis_list)
     {
