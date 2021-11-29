@@ -25,6 +25,7 @@ public class BulletScript : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        
         //if (Player.transform.childCount > 0)
         if(BulletScriptTriiger)
         {
