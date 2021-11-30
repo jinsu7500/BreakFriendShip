@@ -126,23 +126,23 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         #endregion
 
         //고스트 움직임
-        int m = 0;
-        for (m = 0; m < player.Length; m++)
-        {
-            if (player_isLeft[m] != true)
-            {
-                break;
-            }
-        }
+        //int m = 0;
+        //for (m = 0; m < player.Length; m++)
+        //{
+        //    if (player_isLeft[m] != true)
+        //    {
+        //        break;
+        //    }
+        //}
 
-        if (m == player.Length)
-        {
-            GameObject.Find("GhostTest").GetComponent<GhostScript>().GhostMove();
-        }
+        //if (m == player.Length)
+        //{
+        //    GameObject.Find("GhostTest").GetComponent<GhostScript>().GhostMove();
+        //}
 
-        if (m != player.Length)
-        {
-        }
+        //if (m != player.Length)
+        //{
+        //}
 
         if (PV.IsMine)
         {
