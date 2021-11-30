@@ -40,7 +40,7 @@ public class BoxScript : MonoBehaviourPunCallbacks
             //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
 
             bullet.BulletScriptTriiger = false;
-            PV.RPC("hitcountRPC", RpcTarget.All);
+
         }
     }
 
@@ -61,18 +61,5 @@ public class BoxScript : MonoBehaviourPunCallbacks
     void Animations()
     {
         AN.SetBool("hit", false);
-    }
-    [PunRPC]
-    void hitcountRPC()
-    {
-        gameObject.SetActive(false);
-        DisappearTile.gameObject.SetActive(false);
-        BreakBox1.SetActive(true);
-        AppleKey.SetActive(true);
-        BreakTile.gameObject.SetActive(false);
-
-        //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
-
-        bullet.BulletScriptTriiger = false;
     }
 }

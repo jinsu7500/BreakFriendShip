@@ -14,7 +14,7 @@ public class ElevatorScript : MonoBehaviour
     static string[] player_Elevator = { "0", "0", "0", "0" };
     public PhotonView PV;
     public Rigidbody2D RB;
-    public int player_round;
+
     void Start()
     {
 
@@ -33,7 +33,6 @@ public class ElevatorScript : MonoBehaviour
     private void OnCollisionExit2D(Collision2D other)
     {
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-
         string[] name_and_elevator = new string[2];
         
         if (other.gameObject.name != "Tilemap" && other.gameObject.name != "Square")
@@ -61,15 +60,11 @@ public class ElevatorScript : MonoBehaviour
     {
 
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-
+        
         string[] name_and_elevator = new string[2];
         
         if (other.gameObject.name != "Tilemap" && other.gameObject.name != "Square")
         {
-            for (int i = 0; i < player.Length; i++)
-            {
-                player[i].GetComponent<PlayerScript>().Round = player_round;
-            }
             Debug.Log(other.gameObject.name);
             
             string LocalPlayer = other.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
@@ -106,16 +101,12 @@ public class ElevatorScript : MonoBehaviour
                 PV.RPC("RB_RPC", RpcTarget.All);
             }
         }
-
-     
-
-        else if(other.gameObject.name == "Tilemap" && player_round == 3)
+        else if(other.gameObject.name == "Tilemap")
         {
  
             GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start1();
         }
         
-
     }
     [PunRPC]
     void RB_RPC()
