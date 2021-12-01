@@ -389,7 +389,6 @@ MonoBehaviour:
   SR: {fileID: 4312344593330058941}
   PV: {fileID: 4312344593330058929}
   NickNameText: {fileID: 4312344593842402571}
-  Round: 0
   isGround: 0
   isRun: 0
   isLeft: 0

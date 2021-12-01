@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class FruitScript : MonoBehaviourPunCallbacks
 {
     //int FruitCount = 0;
-    public float speed;
-    public float distance;
+    //public float speed;
+    //public float distance;
     public GameObject player;
     public PhotonView PV;
 

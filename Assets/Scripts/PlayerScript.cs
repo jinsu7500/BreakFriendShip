@@ -16,9 +16,9 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
 
     string[] player_name = new string[4];
-    static string[] player_jump = { "0","0","0","0"};
+    static string[] player_jump = { "0", "0", "0", "0" };
     static string[] player_axis = { "0", "0", "0", "0" };
-    static bool[] player_isLeft = { false,false,false,false };
+    static bool[] player_isLeft = { false, false, false, false };
 
     public bool isGround;
     public bool isRun;
@@ -31,7 +31,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
     void Awake()
     {
-        
+
         // 닉네임 표시
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
 
@@ -51,7 +51,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log(GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text);
         #region 1. 캐릭터 동시에 움직이면 사과 움직이기 (위 양 옆)
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
-        
+
         //for (int i = 0; i < player.Length; i++)
         //{
         //    player_name[i] = player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
@@ -168,7 +168,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
                 isLeft = true;
                 PV.RPC("RoomMaster_isLeft", RpcTarget.All, name_isLeft_list);
             }
-            if(axis == 1)
+            if (axis == 1)
             {
                 name_isLeft_list[1] = "false";
                 isLeft = false;
@@ -189,22 +189,22 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             else
             {
                 isRun = false;
-                
+
                 AN.SetBool("isRun", false);
                 PV.RPC("RunOFF", RpcTarget.All);
             }
 
             // 점프, 바닥체크
             isGround = Physics2D.OverlapCircle((Vector2)transform.position + new Vector2(0, -0.5f), 0.07f, 1 << LayerMask.NameToLayer("Ground"));
-            
-          
+
+
             AN.SetBool("isJump", !isGround);
             if (Input.GetKeyDown(KeyCode.Space) && jumpCount < 1)
             {
                 //Debug.Log(jumpCount);
                 PV.RPC("JumpRPC", RpcTarget.All, isGround);
                 name_jump_list[1] = "1";
-                
+
                 jumpCount++;
 
                 AN.SetBool("isDoubleJump", !isGround);
@@ -216,7 +216,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             }
             if (isGround)
             {
-                jumpCount = 0;               
+                jumpCount = 0;
 
                 AN.SetBool("isDoubleJump", false);
 
@@ -226,9 +226,9 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
                 PV.RPC("RoomMaster_Jump", RpcTarget.All, name_jump_list);
                 //  PV.RPC("RunOFF", RpcTarget.All);
             }
-            
-            
-           
+
+
+
         }
 
         //IsMine이 아닌 것들은 부드럽게 위치 동기화
@@ -258,9 +258,9 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         {
             if (player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == name_isLeft_list[0])
             {
-                if(name_isLeft_list[1] == "true")
+                if (name_isLeft_list[1] == "true")
                     player_isLeft[i] = true;
-                else if(name_isLeft_list[1] == "false")
+                else if (name_isLeft_list[1] == "false")
                     player_isLeft[i] = false;
             }
         }
@@ -294,7 +294,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
         for (int i = 0; i < player.Length; i++)
         {
-            if(player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == name_jump_list[0])
+            if (player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == name_jump_list[0])
             {
                 player_jump[i] = name_jump_list[1];
             }
@@ -361,13 +361,15 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
     //플레이어 사망시
     [PunRPC]
-    void PlayerDieRPC() {
-        AN.SetBool("Appearing", true);        
+    void PlayerDieRPC()
+    {
+        AN.SetBool("Appearing", true);
     }
 
     //플레이어 부활시
     [PunRPC]
-    void PlayerRespawnRPC() {
+    void PlayerRespawnRPC()
+    {
         AN.SetBool("Appearing", false);
     }
 }
