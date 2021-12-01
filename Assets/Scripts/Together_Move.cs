@@ -7,6 +7,7 @@ using Photon.Realtime;
 public class Together_Move : MonoBehaviour
 {
     public GameObject apple;
+    public GameObject position;
     public PhotonView PV;
 
     public void Move_to_Right()
@@ -61,5 +62,12 @@ public class Together_Move : MonoBehaviour
         Vector2 vec = new Vector2(x, y);
         transform.position = Vector2.MoveTowards(transform.position, vec, 0.3f);
     }
+    void OnCollisionEnter2D(Collision2D other)
+    {
 
+        if (other.gameObject.name == "Tilemap")
+        {
+            apple.transform.position = new Vector3(position.transform.position.x, position.transform.position.y, position.transform.position.z);
+        }
+    }
 }

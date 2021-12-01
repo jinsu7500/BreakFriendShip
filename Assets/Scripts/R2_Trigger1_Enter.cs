@@ -42,8 +42,8 @@ public class R2_Trigger1_Enter : MonoBehaviour
         }
         진수코드 end*/
 
-        if (collision.name == "Round2_Apple1" || collision.name == "Round2_Apple2" || collision.name == "Round2_Apple3" || collision.name == "Box1" || collision.name == "Box2" || collision.name == "Box3" || collision.name == "Square" || collision.name == "Bullet" || collision.name == "Tilemap") { } //예외처리 사과
-        else
+        //if (collision.name == "Round2_Apple1" || collision.name == "Round2_Apple2" || collision.name == "Round2_Apple3" || collision.name == "Box1" || collision.name == "Box2" || collision.name == "Box3" || collision.name == "Square" || collision.name == "Bullet" || collision.name == "Tilemap") { } //예외처리 사과
+        if (collision.tag == "Player")
         {
 
             GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
@@ -95,9 +95,9 @@ public class R2_Trigger1_Enter : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
 
-        //if(collision.tag =="Player")
-        if (collision.name == "Round2_Apple1" || collision.name == "Round2_Apple2" || collision.name == "Round2_Apple3" || collision.name == "Box1" || collision.name == "Box2" || collision.name == "Box3" || collision.name == "Square" || collision.name == "Bullet") { } //예외처리 사과
-        else
+
+        //if (collision.name == "Round2_Apple1" || collision.name == "Round2_Apple2" || collision.name == "Round2_Apple3" || collision.name == "Box1" || collision.name == "Box2" || collision.name == "Box3" || collision.name == "Square" || collision.name == "Bullet") { } //예외처리 사과
+        if (collision.tag == "Player")
         {
             Debug.Log(collision.name);
             GameObject[] player = GameObject.FindGameObjectsWithTag("Player");

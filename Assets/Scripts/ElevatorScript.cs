@@ -14,6 +14,7 @@ public class ElevatorScript : MonoBehaviour
     static string[] player_Elevator = { "0", "0", "0", "0" };
     public PhotonView PV;
     public Rigidbody2D RB;
+    public GameObject round3;
 
     void Start()
     {
@@ -101,12 +102,13 @@ public class ElevatorScript : MonoBehaviour
                 PV.RPC("RB_RPC", RpcTarget.All);
             }
         }
-        else if(other.gameObject.name == "Tilemap")
-        {
- 
-            GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start1();
-        }
         
+        else if(other.gameObject.name == "Tilemap" && round3.activeSelf == true)
+        {
+            
+                GameObject.Find("TextEffect").GetComponent<Typingeffect>().text_start1();
+        }
+        Debug.Log(other.gameObject.name);
     }
     [PunRPC]
     void RB_RPC()

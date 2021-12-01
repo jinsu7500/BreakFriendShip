@@ -13,10 +13,18 @@ public class RoundOnOff : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "Player") 
+        if (collision.tag == "Player")
         {
             RoundTriggerOn.SetActive(true);
             RoundTriggerOff.SetActive(false);
+        }
+        if (RoundTriggerOn.gameObject.name == "Round4")
+        {
+            GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < player.Length; i++)
+            {
+                player[i].GetComponent<PlayerScript>().Round =4;
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ public class Typingeffect : MonoBehaviour
 
     public Text tx;
     public GameObject PlayerObj;
+    public GameObject round3position;
     public GameObject TextEffect;
     public PhotonView PV;
     private string m_text = "무궁화 꽃이 피었습니다";
@@ -59,7 +60,7 @@ public class Typingeffect : MonoBehaviour
 
     public void test()
     {
-        //PV.RPC("Show_deathImg", RpcTarget.All); 죽었을 때 RPC함수쓰면됨
+        PV.RPC("Show_deathImg", RpcTarget.All); 
     }
 
     public void Stop_Func()
@@ -118,6 +119,17 @@ IEnumerator countTime(float[] random)
     [PunRPC]
     public void Show_deathImg()
     {
-        //죽었을 때 함수쓰면 됨
-    }
+        int index = 0;
+        for (index = 0; index < PlayerObj.transform.childCount; index++)
+        {
+            if (PlayerObj.transform.GetChild(index).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == PhotonNetwork.LocalPlayer.NickName)
+            {
+                break;
+            }
+        }
+
+        //Respawn함수
+        PlayerObj.transform.GetChild(index).transform.position = new Vector3(round3position.transform.position.x, round3position.transform.position.y, round3position.transform.position.z);
+    
+}
 }

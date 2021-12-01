@@ -8,13 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Title.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/shin.unity
-    guid: 9282bea0e5792a54aabba6891d954491
-  - enabled: 0
-    path: Assets/Scenes/Hong.unity
-    guid: fcb154cc20dbeeb4e8c329400a1a7224
-  - enabled: 0
-    path: Assets/Scenes/TestScene.unity
-    guid: 93c11692e1d1bd44993c8cdab9eaa089
   m_configObjects: {}

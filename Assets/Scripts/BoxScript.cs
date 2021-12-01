@@ -23,13 +23,13 @@ public class BoxScript : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(HitCount == 4)
+        if (HitCount == 4)
         {
             gameObject.SetActive(false);
             DisappearTile.gameObject.SetActive(false);
@@ -40,7 +40,7 @@ public class BoxScript : MonoBehaviourPunCallbacks
             //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
 
             bullet.BulletScriptTriiger = false;
-
+            PV.RPC("hitcountRPC", RpcTarget.All);
         }
     }
 
@@ -51,7 +51,7 @@ public class BoxScript : MonoBehaviourPunCallbacks
             AN.SetBool("hit", true);
             HitCount++;
         }
- 
+
 
     }
     void OnTriggerExit2D(Collider2D collision)
@@ -61,5 +61,18 @@ public class BoxScript : MonoBehaviourPunCallbacks
     void Animations()
     {
         AN.SetBool("hit", false);
+    }
+    [PunRPC]
+    void hitcountRPC()
+    {
+        gameObject.SetActive(false);
+        DisappearTile.gameObject.SetActive(false);
+        BreakBox1.SetActive(true);
+        AppleKey.SetActive(true);
+        BreakTile.gameObject.SetActive(false);
+
+        //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
+
+        bullet.BulletScriptTriiger = false;
     }
 }

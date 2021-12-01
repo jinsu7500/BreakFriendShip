@@ -418,4 +418,5 @@ MonoBehaviour:
   NickNameText: {fileID: 5633039453386455765}
   isGround: 0
   isRun: 0
+  isLeft: 0
   isPlayerDie: 0
