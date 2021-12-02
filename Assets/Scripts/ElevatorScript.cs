@@ -76,7 +76,7 @@ public class ElevatorScript : MonoBehaviour
                 {
                     if (player_name[i] == LocalPlayer)
                     {
-                        Debug.Log("dafasdfasd");
+                        //Debug.Log("dafasdfasd");
                         player_Elevator[i] = "1";
                         name_and_elevator[0] = LocalPlayer;
                         name_and_elevator[1] = player_Elevator[i];
@@ -115,6 +115,7 @@ public class ElevatorScript : MonoBehaviour
     {
         RB.constraints = RigidbodyConstraints2D.None;
         RB.constraints = RigidbodyConstraints2D.FreezePositionX;
+        RB.constraints = RigidbodyConstraints2D.FreezePositionY;
         RB.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
     [PunRPC]

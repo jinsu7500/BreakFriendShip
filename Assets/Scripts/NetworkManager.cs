@@ -230,8 +230,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         if (SelectChaPanel.char_num == 1)
         {
             GameObject Player = PhotonNetwork.Instantiate("MaskDude", SpawnPosition_P1.position, SpawnPosition_P1.rotation) as GameObject;            
-            Player.transform.parent = PlayerObj.transform;
-            
+            Player.transform.parent = PlayerObj.transform;          
 
 
         }

@@ -30,6 +30,7 @@ public class LockScript : MonoBehaviour
         {
             gameObject.GetComponent<SpriteRenderer>().sprite = spr;
             fruit.gameObject.SetActive(false);
+            //collision.gameObject.SetActive(false);
             Round1BreakTile.gameObject.SetActive(false);
         }
     }

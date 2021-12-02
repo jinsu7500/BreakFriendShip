@@ -115,10 +115,11 @@ IEnumerator countTime(float[] random)
         
     }
 
-    
+
     [PunRPC]
     public void Show_deathImg()
     {
+        Stop_Func();
         int index = 0;
         for (index = 0; index < PlayerObj.transform.childCount; index++)
         {
@@ -130,6 +131,7 @@ IEnumerator countTime(float[] random)
 
         //RespawnÇÔ¼ö
         PlayerObj.transform.GetChild(index).transform.position = new Vector3(round3position.transform.position.x, round3position.transform.position.y, round3position.transform.position.z);
-    
-}
+        TextEffect.SetActive(true);
+        text_start1();
+    }
 }

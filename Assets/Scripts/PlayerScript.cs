@@ -57,7 +57,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
             for (int i = 0; i < player.Length; i++)
             {
-                player_name[i] = player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
+                player_name[i] = player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text; //1~4P 받아오기
             }
 
             /*캐릭터 동시에 점프되었을 때*/
@@ -86,7 +86,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             }
             if (k1 == player.Length)
             {
-                Debug.Log(player_axis[0]);
+                //Debug.Log(player_axis[0]);
                 //캐릭터가 정지되었을떄 실행
             }
 
