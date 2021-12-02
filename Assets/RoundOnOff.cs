@@ -34,5 +34,13 @@ public class RoundOnOff : MonoBehaviour
                 player[i].GetComponent<PlayerScript>().Round = 5;
             }
         }
+        if (RoundTriggerOn.gameObject.name == "Round6")
+        {
+            GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < player.Length; i++)
+            {
+                player[i].GetComponent<PlayerScript>().Round = 6;
+            }
+        }
     }
 }
