@@ -34,28 +34,21 @@ public class Typingeffect : MonoBehaviour
         }
     }
     public void text_start1()
-    {
-        
+    {        
         InvokeRepeating("text_start", 1.5f,9.6f);
     }
     public void text_start()
-    {
-        
-        Debug.Log("text_startΩ√¿€");
+    {       
         if (NetworkManager.RoomMaster == PhotonNetwork.LocalPlayer.NickName)
         {
-            Debug.Log("text_startifπÆ");
             float[] random_array = new float[m_text.Length+1];
             for (int i = 0; i <= m_text.Length; i++)
             {
                 float random = Random.Range(0.4f, 0.8f);
-                random_array[i] = random;
-                
+                random_array[i] = random;       
             }
-            
             PV.RPC("Text_Syn_RPC", RpcTarget.All, random_array);
-        }
-        
+        } 
     }
 
     public void test()
@@ -86,33 +79,25 @@ public class Typingeffect : MonoBehaviour
     }
 
 IEnumerator countTime(float[] random)
-    {
-        
-
+    {       
         string name = PlayerObj.transform.GetChild(0).name;
         PlayerScript PS = GameObject.Find(name).GetComponent<PlayerScript>();
 
         for (int i = 0; i<= m_text.Length; i++)
         {
-            
             tx.text = m_text.Substring(0, i);
-            
             if(i== m_text.Length)
-            {
-                Debug.Log("hh");
+            {               
                 bool isRun = PS.isRun;
                 bool isGround = PS.isGround;
                 if (isRun || !isGround)
                 {
-                    Debug.Log("¡◊¿Ω");
+                    //Debug.Log("¡◊¿Ω");
                     test();
                 }
-                
             }
-            yield return new WaitForSeconds(random[i]);
-            
+            yield return new WaitForSeconds(random[i]);  
         }
-        
     }
 
 

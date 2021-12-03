@@ -18,12 +18,10 @@ public class R6_TrapMove : MonoBehaviour
         pos = transform.position;
     }
 
-
     void Update()
     {
         if (isXmove) { moveX(); }
         else moveY();
-
     }
 
     private void moveX() {
