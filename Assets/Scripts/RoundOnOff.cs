@@ -18,6 +18,14 @@ public class RoundOnOff : MonoBehaviour
             RoundTriggerOn.SetActive(true);
             RoundTriggerOff.SetActive(false);
         }
+        if (RoundTriggerOn.gameObject.name == "Round3")
+        {
+            GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < player.Length; i++)
+            {
+                player[i].GetComponent<PlayerScript>().Round = 3;
+            }
+        }
         if (RoundTriggerOn.gameObject.name == "Round4")
         {
             GameObject[] player = GameObject.FindGameObjectsWithTag("Player");

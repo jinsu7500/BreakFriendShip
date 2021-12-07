@@ -14,6 +14,8 @@ public class BulletScript : MonoBehaviourPunCallbacks
     public bool BulletScriptTriiger = false;
     //-85.54383
 
+    public AudioSource mysfx;
+    public AudioClip hitboxsfx;
     [SerializeField]
     private bool isRight = true;
     // Start is called before the first frame update
@@ -52,6 +54,8 @@ public class BulletScript : MonoBehaviourPunCallbacks
         if(collision.tag == "Ground" || collision.tag == "Player" || collision.tag == "Box")
         {
             PV.RPC("moveBulletRPC", RpcTarget.AllBuffered);
+            if (collision.tag == "Box")
+                hitSound();
             //Destroy(bullet);           
 
         }
@@ -68,6 +72,10 @@ public class BulletScript : MonoBehaviourPunCallbacks
         //bullet.transform.position = new Vector3(-4.5f, -1.5f, 0f);
         bullet.transform.position = new Vector3(BulletFire.transform.position.x, BulletFire.transform.position.y,BulletFire.transform.position.z);
         //Instantiate(bullet, BulletFire.transform.position, BulletFire.transform.rotation);
+    }
+    public void hitSound()
+    {
+        mysfx.PlayOneShot(hitboxsfx);
     }
 
 }

@@ -12,7 +12,8 @@ public class FruitScript : MonoBehaviourPunCallbacks
     //public float distance;
     public GameObject player;
     public PhotonView PV;
-
+    public AudioSource mysfx;
+    public AudioClip applesfx;
     public bool isTrigger = false;
     private string name = "";
     void Start()
@@ -36,7 +37,7 @@ public class FruitScript : MonoBehaviourPunCallbacks
             {
                 if (player.transform.GetChild(i).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == name) break;
             }
-            float x = player.transform.GetChild(i).position.x + 0.5f;
+            float x = player.transform.GetChild(i).position.x + 0.7f;
             float y = player.transform.GetChild(i).position.y - 0.1f;
             Vector2 vec = new Vector2(x, y);
             transform.position = Vector2.MoveTowards(transform.position, vec, 0.5f);
@@ -58,7 +59,7 @@ public class FruitScript : MonoBehaviourPunCallbacks
                 }
             }
 
-            float x = player.transform.GetChild(i).position.x + 0.5f;
+            float x = player.transform.GetChild(i).position.x + 0.7f;
             float y = player.transform.GetChild(i).position.y - 0.1f;
             Vector2 vec = new Vector2(x, y);
             transform.position = Vector2.MoveTowards(transform.position, vec, 0.5f);
@@ -82,9 +83,14 @@ public class FruitScript : MonoBehaviourPunCallbacks
             Debug.Log(collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text);
             isTrigger = true;
             name =  collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
+            appleSound();
             //PlayerPosition = collision.transform.position;
             //FruitCount++;
         }
 
+    }
+    public void appleSound()
+    {
+        mysfx.PlayOneShot(applesfx);
     }
 }

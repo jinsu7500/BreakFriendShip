@@ -28,11 +28,17 @@ public class Round3_LockScript : MonoBehaviour
     {
         if (collision.tag == "Fruit")
         {
+            GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+            int Round = player[0].GetComponent<PlayerScript>().Round;
+
             gameObject.GetComponent<SpriteRenderer>().sprite = spr;
             fruit.gameObject.SetActive(false);
             Round3BreakTile.gameObject.SetActive(false);
             GameObject.Find("TextEffect").GetComponent<Typingeffect>().Stop_Func();
+
             
+            
+
         }
     }
 }

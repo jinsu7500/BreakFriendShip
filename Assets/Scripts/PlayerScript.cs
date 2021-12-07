@@ -29,6 +29,9 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     string direction;
     public bool isPlayerDie = false;
 
+    public AudioSource mysfx;
+    public AudioClip jumpsfx;
+
     void Awake()
     {
 
@@ -211,7 +214,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
                 //Debug.Log(jumpCount);
                 PV.RPC("JumpRPC", RpcTarget.All, isGround);
                 name_jump_list[1] = "1";
-
+                JumpSound();
                 jumpCount++;
 
                 AN.SetBool("isDoubleJump", !isGround);
@@ -378,5 +381,10 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     void PlayerRespawnRPC()
     {
         AN.SetBool("Appearing", false);
+    }
+
+    public void JumpSound()
+    {
+        mysfx.PlayOneShot(jumpsfx);
     }
 }

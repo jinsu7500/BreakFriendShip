@@ -15,6 +15,7 @@ public class timer : MonoBehaviour
     public GameObject time;
     public GameObject Canvas;
     public GameObject TextEffect;
+    public GameObject PlayTimer;
 
     public Image Title_BG;
     public Image Title_Name;
@@ -55,7 +56,8 @@ public class timer : MonoBehaviour
 
             GameObject.Find("NetworkManager").GetComponent<NetworkManager>().Collect_player();
             TextEffect.SetActive(true);
-            
+            PlayTimer.SetActive(true);
+            PlayTimer.GetComponent<PlayTimer>().TimerOn = true;
 
         }
         countdownText.text = (Mathf.Round(setTime)).ToString();

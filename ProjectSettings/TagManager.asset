@@ -9,6 +9,13 @@ TagManager:
   - Box
   - Fruit
   - Defense
+  - timer
+  - hour
+  - min
+  - sec
+  - C_hour
+  - C_min
+  - C_sec
   layers:
   - Default
   - TransparentFX
