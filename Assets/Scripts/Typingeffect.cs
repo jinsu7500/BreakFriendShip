@@ -23,7 +23,7 @@ public class Typingeffect : MonoBehaviour
 
         if (tx.text == "무궁화 꽃이 피었습니다")
         {
-            Debug.Log("hh");
+            //Debug.Log("hh");
             bool isRun = PS.isRun;
             bool isGround = PS.isGround;
             if (isRun || !isGround)

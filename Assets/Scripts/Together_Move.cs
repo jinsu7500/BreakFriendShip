@@ -16,6 +16,7 @@ public class Together_Move : MonoBehaviour
     private float jumpSpeed = 0.3f;
 
 
+
     public void Move_to_Right()
     {
         float x = apple.transform.position.x + 0.01f;
@@ -74,6 +75,7 @@ public class Together_Move : MonoBehaviour
         if (other.gameObject.name == "Tilemap")
         {
             apple.transform.position = new Vector3(position.transform.position.x, position.transform.position.y, position.transform.position.z);
+            
         }
     }
 }
