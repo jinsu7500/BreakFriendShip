@@ -466,6 +466,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &57995781
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1954,6 +1956,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &162206744
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2157,6 +2161,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &165324744
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3480,6 +3486,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &231073245
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4179,6 +4187,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &263914426
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4385,6 +4395,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 557110120}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!1 &284929723
 GameObject:
   m_ObjectHideFlags: 0
@@ -7449,6 +7461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 2134148303}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &462661639
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8708,7 +8722,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -108.00905, y: -13.989962, z: -10}
+  m_LocalPosition: {x: -107.703026, y: -13.9884205, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -11072,6 +11086,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &649018310
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12793,6 +12809,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &726548683
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -13696,6 +13714,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &775222585
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -92667,6 +92687,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &985242052
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -93149,6 +93171,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &988302407
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -93352,6 +93376,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &998559048
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -93476,6 +93502,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &1000654044
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -95556,6 +95584,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!114 &1141250717
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96806,6 +96836,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &1272117702
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -97329,6 +97361,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &1286739345
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -98071,6 +98105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1571793159}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &1312277580
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -98226,6 +98262,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &1339105281
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -99353,6 +99391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &1419042319
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -99652,6 +99692,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!114 &1435723795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99800,6 +99842,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &1445213175
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -119642,7 +119686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1623893508
 Transform:
   m_ObjectHideFlags: 0
@@ -120214,6 +120258,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!114 &1673675131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120842,6 +120888,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &1725524491
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -123269,6 +123317,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!114 &1866865975
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124614,6 +124664,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 1758971067}
+  PlayerSpawn2: {fileID: 1504380791}
+  GhostTest: {fileID: 1393176325}
 --- !u!212 &1927212660
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -124944,6 +124996,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player: {fileID: 1499575366}
   PlayerSpawn: {fileID: 613850240}
+  PlayerSpawn2: {fileID: 0}
+  GhostTest: {fileID: 0}
 --- !u!61 &1967711981
 BoxCollider2D:
   m_ObjectHideFlags: 0
