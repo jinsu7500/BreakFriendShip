@@ -13,13 +13,7 @@ public class R2_Trigger1_Enter : MonoBehaviour
     string[] player_name = new string[4];
     public PhotonView PV;
     public Tilemap BreakTile;
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
 
-    //    bullet.BulletScriptTriiger = true;
-
-    //}
     void Update()
     {
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
@@ -30,22 +24,9 @@ public class R2_Trigger1_Enter : MonoBehaviour
     }
     // 트리거 엔터에 들어왔을 때 실행
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        /*진수코드 start
-        Debug.Log("트리거엔터");
+    {             
         if (collision.tag == "Player")
         {
-            //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
-            //bullet = GameObject.Find("Bullet").GetComponent<BulletScript>();
-
-            bullet.BulletScriptTriiger = true;
-        }
-        진수코드 end*/
-
-        //if (collision.name == "Round2_Apple1" || collision.name == "Round2_Apple2" || collision.name == "Round2_Apple3" || collision.name == "Box1" || collision.name == "Box2" || collision.name == "Box3" || collision.name == "Square" || collision.name == "Bullet" || collision.name == "Tilemap") { } //예외처리 사과
-        if (collision.tag == "Player")
-        {
-
             GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
             string[] name_and_isIn = new string[2]; // 이름, 플레이어가 층에 있는지 없는지 저장 변수
             string LocalPlayer = collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text; // 현재 자기자신 플레이어 닉네임

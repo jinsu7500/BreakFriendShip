@@ -16,6 +16,8 @@ public class FruitScript : MonoBehaviourPunCallbacks
     public AudioClip applesfx;
     public bool isTrigger = false;
     private string name = "";
+
+    private bool isSound = false;
     void Start()
     {
         
@@ -73,19 +75,16 @@ public class FruitScript : MonoBehaviourPunCallbacks
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Ãæµ¹");
-        //for (int i = 0; i < player.transform.childCount; i++) 
-        //{
-        //    if (player.transform.GetChild(i).transform.GetChild(1).GetComponent<Text>().text == PhotonNetwork.LocalPlayer.NickName) break;
-        //}
         if (collision.tag == "Player")
         {
-            Debug.Log(collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text);
             isTrigger = true;
             name =  collision.gameObject.transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text;
-            appleSound();
-            //PlayerPosition = collision.transform.position;
-            //FruitCount++;
+            if (!isSound)
+            {
+                appleSound();
+                isSound = true;
+            }
+
         }
 
     }

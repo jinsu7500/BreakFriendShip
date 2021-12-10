@@ -13,8 +13,9 @@ public class LockScript : MonoBehaviour
     public Tilemap Round1BreakTile;
     public AudioSource mysfx;
     public AudioClip locksfx;
-    public Canvas ClearTime;
-   
+    
+    [SerializeField]
+    private Canvas ClearTime;   
     private Text C_Hour;
     private Text C_Min;
     private Text C_sec;

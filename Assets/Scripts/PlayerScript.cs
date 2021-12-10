@@ -146,7 +146,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
             if (m == player.Length)
             {
-                GameObject.Find("GhostTest").GetComponent<GhostScript>().GhostMove();
+                GameObject.Find("R6_GhostMonster").GetComponent<GhostScript>().GhostMove();
             }
 
             if (m != player.Length)

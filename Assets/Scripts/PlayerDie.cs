@@ -10,8 +10,8 @@ public class PlayerDie : MonoBehaviour
     //public PhotonView PV;    
     public GameObject Player;
     public GameObject PlayerSpawn;
-    public GameObject PlayerSpawn2;
-    public GameObject GhostTest;
+    public GameObject R6_GhostRespawn;
+    public GameObject R6_GhostMonster;
     //public Rigidbody2D PlayerPosition;
     //public PlayerScript playerscript;
     //public Animator AN;
@@ -49,7 +49,7 @@ public class PlayerDie : MonoBehaviour
 
             //Respawn함수
             Player.transform.GetChild(index).transform.position = new Vector3(PlayerSpawn.transform.position.x, PlayerSpawn.transform.position.y, PlayerSpawn.transform.position.z);
-            GhostTest.transform.position = new Vector3(PlayerSpawn2.transform.position.x, PlayerSpawn2.transform.position.y, PlayerSpawn2.transform.position.z);
+            R6_GhostMonster.transform.position = new Vector3(R6_GhostRespawn.transform.position.x, R6_GhostRespawn.transform.position.y, R6_GhostRespawn.transform.position.z);
 
             //리스폰 애니메이션, 보류
             //playerscript = Player.transform.GetChild(index).GetComponent<PlayerScript>();
