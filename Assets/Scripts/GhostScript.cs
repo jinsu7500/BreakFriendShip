@@ -18,7 +18,7 @@ public class GhostScript : MonoBehaviourPunCallbacks
     public GameObject GhostTest;
 
 
-    private string names = "";
+    public string names = "";
     void Start()
     {
     }

@@ -32,6 +32,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
     public AudioSource mysfx;
     public AudioClip jumpsfx;
 
+
     void Awake()
     {
 
@@ -54,6 +55,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         //Debug.Log(GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text);
         #region 1. 캐릭터 동시에 움직이면 사과 움직이기 (위 양 옆)
         GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+
 
         if (Round == 4)
         {

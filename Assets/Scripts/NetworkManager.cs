@@ -555,8 +555,9 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         
         if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
-            Gotimer();
+            //Gotimer();
         }
+        Gotimer();
     }
 
 
