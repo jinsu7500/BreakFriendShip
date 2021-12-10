@@ -552,7 +552,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             if (Left.transform.GetChild(j).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
                 count = count + 1;
         }
-        Gotimer();
+        
         if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
             Gotimer();
