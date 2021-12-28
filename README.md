@@ -72,7 +72,11 @@ BreakFriendship은 유니티엔진을 활용한 실시간 협동 2D 플랫포머
 
 + 방 화면  
   ![image](https://user-images.githubusercontent.com/56360477/147562626-6d41bcf3-2e75-4efc-bc7f-796bc72698a2.png)  
-  -  현재 접속한 플레이어와, 플레이어의 레디상태를 표시해준다. 플레이어간의 실시간 채팅이 가능한 채팅창이 존재한다.
+  -  현재 접속한 플레이어와, 플레이어의 레디상태를 표시해준다. 플레이어간의 실시간 채팅이 가능한 채팅창이 존재한다.  
+
++ 1Round - 튜토리얼
+![round1](https://user-images.githubusercontent.com/56360477/147579669-fee6abaf-779c-49e6-853e-483899eec822.gif)
+
 
 
    
