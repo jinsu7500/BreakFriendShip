@@ -75,11 +75,31 @@ BreakFriendship은 유니티엔진을 활용한 실시간 협동 2D 플랫포머
   -  현재 접속한 플레이어와, 플레이어의 레디상태를 표시해준다. 플레이어간의 실시간 채팅이 가능한 채팅창이 존재한다.  
 
 + 1Round - 튜토리얼
-![round1](https://user-images.githubusercontent.com/56360477/147579669-fee6abaf-779c-49e6-853e-483899eec822.gif)  
+![round1_resize](https://user-images.githubusercontent.com/56360477/147594686-7d607780-341b-45e3-b79d-956f793b3049.gif)  
+
 
 + 2Round - 총알피하기  
+![round2_resize](https://user-images.githubusercontent.com/56360477/147594693-976fe2ad-3c59-4944-abe6-c414ab936ab5.gif)   
 
-![round2](https://user-images.githubusercontent.com/56360477/147589411-0cf5f903-e2c1-46ed-ac25-1df693d2d675.gif)
++ 3Round - 무궁화 꽃이 피었습니다.
+  ![round3_resize](https://user-images.githubusercontent.com/56360477/147594801-84bdd18d-ed2c-402f-b3e8-83dac9a1b3fa.gif)  
+  
++ 4Round - 일심동체 유령조작
+![round4_resize](https://user-images.githubusercontent.com/56360477/147594869-9a80b8c9-ea34-4f98-8f9e-7fd7c05ec1fb.gif)  
+
++ 5Round - 장애물 피하기  
+ ![round5_resize](https://user-images.githubusercontent.com/56360477/147594931-7f4ef75e-310e-4e32-a221-e6881a4dcd64.gif)  
+
+
++ 6Round - 추적 몬스터 피하기  
+![round6_resize](https://user-images.githubusercontent.com/56360477/147594937-03454d7a-78a9-4846-a757-e7caa36a1afb.gif)  
+
+-------------------------
+## 시연연상
++ https://www.youtube.com/watch?v=91RTeFIy7q4  
+
+
+
 
 
 
