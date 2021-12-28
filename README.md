@@ -36,6 +36,7 @@ BreakFriendship은 유니티엔진을 활용한 실시간 협동 2D 플랫포머
 4. 로비접속 - Photon서버에 접속을 하여, 방생성, 또는 생성된 방에 게임참가를 할 수 있다.
 5. 방 생성 - 플레이어가 방 생성을 하게 되면, 방 인원수를 2~4명까지 선택 할 수 있고 선택한 인원수에
 맞는 방에 적용된다.
+
 6. 방 접속 - 방 접속을 하게 되면 접속한 플레이어의 캐릭터, 닉네임, Ready 텍스트가 플레이어 마다
 생성된다. Ready버튼을 누르게 되면 누른 플레이어의 Ready 텍스트가 빨간 색으로 변하게 된다. 접속한
 플레이어끼리 실시간 소통할 수 있는 채팅방이 있다.
@@ -54,12 +55,30 @@ BreakFriendship은 유니티엔진을 활용한 실시간 협동 2D 플랫포머
 --------------
 ## 프로그램 실행결과
 + 타이틀 화면  
-![image](https://user-images.githubusercontent.com/56360477/147561724-81514e8b-fb72-407f-80e4-7692cce5b921.png)
--- Start버튼으로 게임을 시작 할 수있고, Exit버튼으로 게임을 종료 할 수 있다.
+![image](https://user-images.githubusercontent.com/56360477/147561724-81514e8b-fb72-407f-80e4-7692cce5b921.png)  
+  - Start버튼으로 게임을 시작 할 수있고, Exit버튼으로 게임을 종료 할 수 있다.
 
-+ 로그인 화면
-![image](https://user-images.githubusercontent.com/56360477/147561845-894dd5d7-9fc6-4054-bffe-569be9ae3eaf.png)
-- 회원가입버트
++ 로그인 화면  
+![image](https://user-images.githubusercontent.com/56360477/147562089-6c10a251-7074-4b6f-8c86-3a1023974b4f.png)  
+  - 회원가입 버튼 클릭시 가입페이지로 이동한다. PlayFab과 연동되어 유저데이터를 저장 및 불러온다.
+
++ 캐릭터 선택 화면  
+![image](https://user-images.githubusercontent.com/56360477/147562216-1e9a3720-0622-4235-9d27-c13014a3b4ef.png)  
+  - 4가지의 캐릭터중 한가지를 선택할 수 있다.  
+
++ 로비 화면  
+ ![image](https://user-images.githubusercontent.com/56360477/147562507-b63d97ea-33ae-400d-a417-a1570f4f82ec.png)  
+   -  로비에서는 현재 접속한 유저의 수와, 플레이중인 방을 보여준다. 방이름을 설정하고 Create버튼 클릭시 방을 만들수 있고, QuickStart버튼을 클릭할 시 현재 있는 방들중 하나에 랜덤으로 입장하게 된다.
+
++ 방 화면  
+  ![image](https://user-images.githubusercontent.com/56360477/147562626-6d41bcf3-2e75-4efc-bc7f-796bc72698a2.png)  
+  -  현재 접속한 플레이어와, 플레이어의 레디상태를 표시해준다. 플레이어간의 실시간 채팅이 가능한 채팅창이 존재한다.
+
+
+   
+
+  
+
 
 
 
