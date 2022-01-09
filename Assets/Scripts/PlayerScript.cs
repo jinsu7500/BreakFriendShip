@@ -17,6 +17,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
     string[] player_name = new string[4];
     static string[] player_jump = { "0", "0", "0", "0" };
+    static bool[] player_ground = { true, true, true, true };
     static string[] player_axis = { "0", "0", "0", "0" };
     static bool[] player_isLeft = { false, false, false, false };
 
@@ -35,6 +36,11 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
     void Awake()
     {
+        GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+        for (int i = 0; i < player.Length; i++)
+        {
+            player_name[i] = player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text; //1~4P 받아오기
+        }
 
         // 닉네임 표시
         NickNameText.text = PV.IsMine ? PhotonNetwork.NickName : PV.Owner.NickName;
@@ -60,16 +66,13 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         if (Round == 4)
         {
 
-            for (int i = 0; i < player.Length; i++)
-            {
-                player_name[i] = player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text; //1~4P 받아오기
-            }
+            
 
             /*캐릭터 동시에 점프되었을 때*/
             int k = 0;
             for (k = 0; k < player.Length; k++)
             {
-                if (player_jump[k] == "0")
+                if (player_ground[k] == false)
                 {
                     break;
                 }
@@ -81,25 +84,25 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             /*캐릭터 동시에 정지되었을 때*/
-            int k1 = 0;
-            for (k1 = 0; k1 < player.Length; k1++)
-            {
-                if (player_axis[k1] != "0")
-                {
-                    break;
-                }
-            }
-            if (k1 == player.Length)
-            {
-                //Debug.Log(player_axis[0]);
-                //캐릭터가 정지되었을떄 실행
-            }
+            //int k1 = 0;
+            //for (k1 = 0; k1 < player.Length; k1++)
+            //{
+            //    if (player_axis[k1] != "0")
+            //    {
+            //        break;
+            //    }
+            //}
+            //if (k1 == player.Length)
+            //{
+            //    //Debug.Log(player_axis[0]);
+            //    //캐릭터가 정지되었을떄 실행
+            //}
 
             /*캐릭터 동시 오른쪽으로 움직일 때*/
             int k2 = 0;
             for (k2 = 0; k2 < player.Length; k2++)
             {
-                if (player_axis[k2] != "1")
+                if (player_isLeft[k2] != false)
                 {
                     break;
                 }
@@ -116,7 +119,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             int k3 = 0;
             for (k3 = 0; k3 < player.Length; k3++)
             {
-                if (player_axis[k3] != "-1")
+                if (player_isLeft[k3] != true)
                 {
                     break;
                 }
@@ -127,7 +130,7 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             /*캐릭터들이 각자 다르게 움직였을 때*/
-            if (k != player.Length && k1 != player.Length && k2 != player.Length && k3 != player.Length)
+            if (k != player.Length  && k2 != player.Length && k3 != player.Length)
             {
                 //물체 정지함수 실행
             }
@@ -158,33 +161,33 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
         if (PV.IsMine)
         {
-            string[] name_jump_list = new string[2];
-            string[] name_axis_list = new string[2];
-            string[] name_isLeft_list = new string[2];
+            //string[] name_jump_list = new string[2];
+            //string[] name_axis_list = new string[2];
+            //string[] name_isLeft_list = new string[2];
 
-            name_jump_list[0] = PhotonNetwork.LocalPlayer.NickName;
-            name_axis_list[0] = PhotonNetwork.LocalPlayer.NickName;
-            name_isLeft_list[0] = PhotonNetwork.LocalPlayer.NickName;
+            //name_jump_list[0] = PhotonNetwork.LocalPlayer.NickName;
+            //name_axis_list[0] = PhotonNetwork.LocalPlayer.NickName;
+            //name_isLeft_list[0] = PhotonNetwork.LocalPlayer.NickName;
 
-
+            
 
             // <-(-1 반환), ->(1 반환) 이동, 안누르면 0 반환
             float axis = Input.GetAxisRaw("Horizontal");
-            name_axis_list[1] = axis.ToString();
+            //name_axis_list[1] = axis.ToString();
 
-            PV.RPC("RoomMaster_Axis", RpcTarget.All, name_axis_list);
+            //PV.RPC("RoomMaster_Axis", RpcTarget.All, name_axis_list);
 
             if (axis == -1)
             {
-                name_isLeft_list[1] = "true";
+                //name_isLeft_list[1] = "true";
                 isLeft = true;
-                PV.RPC("RoomMaster_isLeft", RpcTarget.All, name_isLeft_list);
+                //PV.RPC("RoomMaster_isLeft", RpcTarget.All, name_isLeft_list);
             }
             if (axis == 1)
             {
-                name_isLeft_list[1] = "false";
+                //name_isLeft_list[1] = "false";
                 isLeft = false;
-                PV.RPC("RoomMaster_isLeft", RpcTarget.All, name_isLeft_list);
+                //PV.RPC("RoomMaster_isLeft", RpcTarget.All, name_isLeft_list);
             }
 
             // transform으로 하게되면 벽에 부딪칠 경우 벽을 뚫고 갈려고 함
@@ -215,15 +218,15 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
             {
                 //Debug.Log(jumpCount);
                 PV.RPC("JumpRPC", RpcTarget.All, isGround);
-                name_jump_list[1] = "1";
+                //name_jump_list[1] = "1";
                 JumpSound();
                 jumpCount++;
 
                 AN.SetBool("isDoubleJump", !isGround);
                 PV.RPC("DoubleJumpRPC", RpcTarget.All, isGround);
 
-                name_jump_list[1] = "1";
-                PV.RPC("RoomMaster_Jump", RpcTarget.All, name_jump_list);
+                //name_jump_list[1] = "1";
+                //PV.RPC("RoomMaster_Jump", RpcTarget.All, name_jump_list);
                 // Debug.Log(jumpCount);
             }
             if (isGround)
@@ -232,10 +235,10 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
 
                 AN.SetBool("isDoubleJump", false);
 
-                name_jump_list[1] = "0";
+                //name_jump_list[1] = "0";
                 PV.RPC("JumpRpcOff", RpcTarget.All);
                 PV.RPC("DoubleJumpOffRPC", RpcTarget.All);
-                PV.RPC("RoomMaster_Jump", RpcTarget.All, name_jump_list);
+                //PV.RPC("RoomMaster_Jump", RpcTarget.All, name_jump_list);
                 //  PV.RPC("RunOFF", RpcTarget.All);
             }
 
@@ -364,10 +367,26 @@ public class PlayerScript : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(transform.position);
+            stream.SendNext(PV.Owner.NickName);
+            stream.SendNext(isLeft);
+            stream.SendNext(isGround);
         }
         else
         {
             curPos = (Vector3)stream.ReceiveNext();
+            string PV_name = (string)stream.ReceiveNext();
+            bool PV_isLeft = (bool)stream.ReceiveNext();
+            bool PV_isGround = (bool)stream.ReceiveNext();
+            GameObject[] player = GameObject.FindGameObjectsWithTag("Player");
+            for (int i = 0; i < player.Length; i++)
+            {
+                if (player[i].transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text == PV_name)
+                {
+                    player_isLeft[i] = PV_isLeft;
+                    player_ground[i] = PV_isGround;
+                }
+            }
+
         }
     }
 

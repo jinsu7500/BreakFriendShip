@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: us
     Server: 
     Port: 0
     ProxyServer: 
@@ -84,6 +84,8 @@ MonoBehaviour:
   - RoomMaster_isLeft
   - BreakTileRPC
   - hitcountRPC
+  - show_crownimg
+  - playerout
   DisableAutoOpenWizard: 1
-  ShowSettings: 0
+  ShowSettings: 1
   DevRegionSetOnce: 1

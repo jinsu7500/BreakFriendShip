@@ -59,6 +59,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Transform SpawnPosition_P3;
     public Transform SpawnPosition_P4;
     public GameObject PlayerObj;
+
     //public Image deathImg;
     public static string RoomMaster = "";
 
@@ -74,6 +75,8 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         else PhotonNetwork.JoinRoom(myList[multiple + num].Name);
         MyListRenewal();
     }
+
+
 
     void MyListRenewal()
     {
@@ -552,12 +555,12 @@ public class NetworkManager : MonoBehaviourPunCallbacks
             if (Left.transform.GetChild(j).transform.GetChild(2).GetComponent<Text>().text == "<color=#ff0000>" + "Ready" + "</color>")
                 count = count + 1;
         }
-        
+       
         if (count == Left.transform.childCount && Left.transform.childCount == PhotonNetwork.CurrentRoom.MaxPlayers)
         {
-            //Gotimer();
+            Gotimer();
         }
-        Gotimer();
+       
     }
 
 
