@@ -16,10 +16,6 @@ TagManager:
   - C_hour
   - C_min
   - C_sec
-  - NetworkManager
-  - play
-  - P5
-  - left
   layers:
   - Default
   - TransparentFX

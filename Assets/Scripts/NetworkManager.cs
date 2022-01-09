@@ -59,7 +59,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     public Transform SpawnPosition_P3;
     public Transform SpawnPosition_P4;
     public GameObject PlayerObj;
-
     //public Image deathImg;
     public static string RoomMaster = "";
 
@@ -75,8 +74,6 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         else PhotonNetwork.JoinRoom(myList[multiple + num].Name);
         MyListRenewal();
     }
-
-
 
     void MyListRenewal()
     {
